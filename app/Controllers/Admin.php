@@ -3,7 +3,8 @@
 namespace App\Controllers;
 
 class Admin extends BaseController
-{
+{  
+
     public function jenis_kemasan()
     {
         return view('admin/jenis_kemasan');

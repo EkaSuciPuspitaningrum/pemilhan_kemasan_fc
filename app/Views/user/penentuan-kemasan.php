@@ -15,49 +15,81 @@
             <h1>Pencarian Kemasan</h1>
         </div>
         <div class="section-body">
-           
+            <h2 class="section-title">Data Produk</h2>
+
             <div class="row">
                 <div class="col-12">
-
                     <div class="card">
-                       
-                        <div class="card-body">
-                            <div> 
-                                <table id="table" class="table" style="text-align: center">
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align: center" scope="col">#</th>
-                                            <th style="text-align: center" scope="col">Kode Jenis</th>
-                                            <th style="text-align: center" scope="col">Jenis Kemasan</th>
-                                            <th style="text-align: center" scope="col">Keterangan Jenis Kemasan</th>
-                                            <th style="text-align: center" scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody >
-                                        <!-- @foreach ($jenis_kemasan as $kemasan )
-                                        <tr>
-                                            <th>{{ $i++}}</th>
-                                            <td>{{$kemasan->id_kemasan}}</td>
-                                            <td>{{$kemasan->jenis_kemasan}}</td>
-                                            <td>{{$kemasan->keterangan_kemasan}}</td>
-                                            <td><a data-toggle="modal" href="{{ url('/kemasan_show/{id}',$kemasan->id) }}"  data-target="#editKemasan" type="button" class="btn btn-warning">Edit</a>
-                                                <a href="/kemasan/hapus/{{ $kemasan->id }}" type="button" class="btn btn-danger">Hapus</a>
-                                            </td>
-                                        </tr>
-                                        @endforeach -->
-                                    </tbody>
-                                </table>
-                            </div>
-                            
+                        <div class="card-header">
+                            <h4>Masukkan Data Produk</h4>
                         </div>
+                        <div class="card-body">
+                            <form action="" method="POST" enctype="multipart/form-data">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="namaproduk">Nama Produk</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="namaproduk" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="beratproduk">Berat Produk</label>
+                                    <input type="number"
+                                           class="form-control"
+                                           id="beratproduk" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="ukuranproduk">Ukuran Produk</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="ukuranproduk" required>
+                                    <code>Panjang x Lebar x Tinggi (cm), Jika cair kosongkan!</code>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="volumeproduk">Volume Produk</label>
+                                    <input type="number"
+                                           class="form-control"
+                                           id="volumeproduk" required>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>Kriteria Produk</label>
+                                    <table id="table" class="table table-hover table-bordered mb-3" >
+                                        <thead class="bg-primary">
+                                            <tr>
+                                                <th class="text-white text-center">No</th>
+                                                <th class="text-white text-center">Kode</th>
+                                                <th class="text-white text-center">Kriteria Produk</th>
+                                                <th class="text-white text-center">Pilih Kriteria Produk</th>
+
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white">
+                                            
+                                                <tr>
+                                                    <th class="text-center"></th>
+                                                    <th class="text-center"></th>
+                                                    <th></th>
+                                                    <th class="text-center">
+                                                        <input class="form-check-input" type="checkbox" name="choiceRadio[]"
+                                                        id="defaultCheck1" value="">
+                                                    </th>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="d-grid gap-2 d-md-flex justify-content-center">
+                                    <button class="btn btn-primary" type="submit"><i class="fas fa-save mr-1"></i> Simpan
+                                        Data</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </section>
-
-    
 </div>
 <?= $this->endSection() ?>
 

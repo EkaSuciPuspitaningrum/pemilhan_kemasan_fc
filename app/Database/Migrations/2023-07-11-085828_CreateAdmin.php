@@ -15,7 +15,7 @@ class CreateAdmin extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'username' => [
+            'name' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ],
@@ -27,6 +27,8 @@ class CreateAdmin extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ],
+            'created_date datetime default current_timestamp',
+            'updated_date datetime default current_timestamp on update current_timestamp', 
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('admin');

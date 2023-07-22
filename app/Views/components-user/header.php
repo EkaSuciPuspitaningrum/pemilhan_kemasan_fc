@@ -14,7 +14,7 @@
     <ul class="navbar-nav navbar-right">
         <div class="row">
             <div class="buttons">
-                <a href=""
+                <a href="<?php echo base_url('/login_admin');?>"
                     class="btn btn-warning">Login Admin</a>
             </div>
         </div>

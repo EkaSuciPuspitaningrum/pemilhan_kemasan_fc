@@ -32,7 +32,7 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 
 $routes->get('/login_admin', 'Auth::login_admin');
-$routes->post('/login/aksi_login', 'Auth::aksi_login');
+$routes->post('/login_admin', 'Auth::aksi_login');
 
 
 $routes->get('/dashboard_admin', 'Admin::dashboard_admin');

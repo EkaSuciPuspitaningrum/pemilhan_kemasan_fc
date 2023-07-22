@@ -43,6 +43,7 @@
                         <?php endif;?>
                          <form method="POST"
                             class="needs-validation"
+                            action="<?=base_url('login_admin')?>"
                             novalidate="">
                             <div class="form-group">
                                 <label for="email">Email</label>

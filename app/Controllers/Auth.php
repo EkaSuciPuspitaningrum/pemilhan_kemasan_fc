@@ -14,32 +14,37 @@ class Auth extends BaseController
     public function aksi_login() 
    {
 
-        $session = session();
-        $users = new Admin();
-        $email = $this->request->getVar('email');
-        $password = $this->request->getVar('password');
-        $dataUser = $users->where([
-            'email' => $email,
-        ])->first();
-        if ($dataUser) {
-            if (password_verify($password, $dataUser->password)) {
-                session()->set([
-                    'email' => $dataUser->email,
-                    'name' => $dataUser->name,
-                    'logged_in' => TRUE
-                ]);
-                return redirect()->to(base_url('home'));
-            } else {
-                $session->setFlashdata('msg', 'Wrong Password');
+            $session = session();
+            $userModel = new Admin();
+            $email = $this->request->getVar('email');
+            $password = $this->request->getVar('password');
+            
+            $data = $userModel->where('email', $email)->first();
+            
+            if($data){
+                $pass = $data['password'];
+                $authenticatePassword = password_verify($password, $pass);
+                if($authenticatePassword){
+                    $ses_data = [
+                        'id' => $data['id'],
+                        'name' => $data['name'],
+                        'email' => $data['email'],
+                        'isLoggedIn' => TRUE
+                    ];
+                    $session->set($ses_data);
+                    return redirect()->to('/dashboard_admin');
+                
+                }else{
+                    $session->setFlashdata('msg', 'Password is incorrect.');
+                    return redirect()->to('/login_admin');
+                }
+            }else{
+                $session->setFlashdata('msg', 'Email does not exist.');
                 return redirect()->to('/login_admin');
             }
-        } else {
-            $session->setFlashdata('msg', 'Email not Found');
-            return redirect()->to('/login_admin');
         }
         // dd($email, $password);
-   }
-
+   
    public function logout() 
    {
       session()->destroy();

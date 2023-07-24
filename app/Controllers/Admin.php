@@ -5,6 +5,11 @@ namespace App\Controllers;
 class Admin extends BaseController
 {  
 
+    public function dashboard_admin()
+    {
+        return view('admin/home');
+    }
+
     public function jenis_kemasan()
     {
         return view('admin/jenis_kemasan');

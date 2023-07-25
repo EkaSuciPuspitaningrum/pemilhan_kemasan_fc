@@ -1,7 +1,7 @@
 <?= $this->extend('layouts-admin/app') ?>
 
 <?= $this->section('title') ?>
-  <title>DS &mdash; Dempster Shafer</title>
+  <title>Pemilhan Kemasan &mdash; Jenis Kemasan</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('link') ?>
@@ -17,21 +17,40 @@
         <div class="section-body">
             <h2 class="section-title">Jenis Kemasan</h2>
             <p class="section-lead">Silahkan tambahkan, ubah maupun hapus data jenis-jenis kemasan.</p>
+            <?php if (!empty(session()->getFlashdata('success'))) : ?>
+                <div class="alert alert-succsess alert-dismissible show fade">
+                      <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        <?= session()->getFlashdata('success') ?>
+                      </div>
+                </div>
+            <?php endif ?>
+            <?php if (!empty(session()->getFlashdata('error'))) : ?>
+                <div class="alert alert-danger alert-dismissible show fade">
+                      <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        <?= session()->getFlashdata('error') ?>
+                      </div>
+                </div>
+            <?php endif ?>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body">
-                            
-                            <form action="" method="POST">
+                        <div class="card-body">   
+                            <form action="<?php echo base_url('jenis_kemasan');?>" method="POST">
                                     <div class="form-group">
-                                        <label for="kriteriaKemasan">Jenis Kemasan</label>
+                                        <label for="jenis_kemasan">Jenis Kemasan</label>
                                         <input type="text"
                                             class="form-control"
-                                            id="jenis_kemasan" name="jenis_kemasan">
+                                            id="jenis_kemasan" name="jenis_kemasan" required>
                                             <code>* Isi dengan jenis dan bahan, contoh : Plastik PVC</code>
                                     </div>
                                     <div class="form-group">
-                                        <label for="ketKemasan">Keterangan Kemasan</label>
+                                        <label for="keterangan_kemasan">Keterangan Kemasan</label>
                                         <textarea class="form-control" style="height: 150px" name="keterangan_kemasan"
                                         required></textarea>
                                     </div>
@@ -54,28 +73,32 @@
                         </div>
                         <div class="card-body">
                             <div> 
-                                <table id="table" class="table" style="text-align: center">
+                                <table id="table" class="table">
                                     <thead>
                                         <tr>
                                             <th style="text-align: center" scope="col">#</th>
-                                            <th style="text-align: center" scope="col">Kode Jenis</th>
+                                            <!-- <th style="text-align: center" scope="col">Kode Jenis</th> -->
                                             <th style="text-align: center" scope="col">Jenis Kemasan</th>
                                             <th style="text-align: center" scope="col">Keterangan Jenis Kemasan</th>
+                                            <th style="text-align: center" scope="col">Tanggal Pembuatan</th>
                                             <th style="text-align: center" scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody >
-                                        <!-- @foreach ($jenis_kemasan as $kemasan )
-                                        <tr>
-                                            <th>{{ $i++}}</th>
-                                            <td>{{$kemasan->id_kemasan}}</td>
-                                            <td>{{$kemasan->jenis_kemasan}}</td>
-                                            <td>{{$kemasan->keterangan_kemasan}}</td>
-                                            <td><a data-toggle="modal" href="{{ url('/kemasan_show/{id}',$kemasan->id) }}"  data-target="#editKemasan" type="button" class="btn btn-warning">Edit</a>
-                                                <a href="/kemasan/hapus/{{ $kemasan->id }}" type="button" class="btn btn-danger">Hapus</a>
-                                            </td>
-                                        </tr>
-                                        @endforeach -->
+                                    <?php 
+                                            $no = 1;
+                                            foreach ($data as $r) : ?>
+                                                <tr>
+                                                <td style="text-align: center"><?php echo $no++ ?></td>
+                                                <td><?php echo $r->jenis_kemasan ?></td>
+                                                <td><?php echo $r->keterangan_kemasan ?></td>
+                                                <td style="text-align: center"><?php echo $r->created_date ?></td>
+                                                <td style="text-align: center">
+                                                <button class="btn btn-warning" href="<?php echo base_url('jenis_kemasan/edit/'.$r->id);?>">EDIT</button>
+                                                    <button class="btn btn-danger" href="<?php echo base_url('jenis_kemasan/hapus/'.$r->id);?>">HAPUS</button>
+                                                </td>
+                                                </tr>
+                                            <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>

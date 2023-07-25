@@ -27,6 +27,10 @@ class CreateAdmin extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ],
+            'password_hash' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+            ],
             'created_date datetime default current_timestamp',
             'updated_date datetime default current_timestamp on update current_timestamp', 
         ]);

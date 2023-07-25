@@ -36,8 +36,17 @@ $routes->post('/login_admin', 'Auth::aksi_login');
 
 
 $routes->get('/dashboard_admin', 'Admin::dashboard_admin');
+
 $routes->get('/jenis_kemasan', 'Admin::jenis_kemasan');
-$routes->get('/kriteria_kemasan', 'Admin::kriteria_kemasan');
+$routes->post('/jenis_kemasan', 'Admin::jenis_kemasan_create');
+$routes->get('/jenis_kemasan/edit', 'Admin::jenis_kemasan_edit');
+$routes->post('/jenis_kemasan/hapus', 'Admin::jenis_kemasan_delete');
+
+$routes->get('/kriteria_produk', 'Admin::kriteria_produk');
+$routes->post('/kriteria_produk', 'Admin::kriteria_produk_create');
+$routes->get('/kriteria_produk/edit', 'Admin::kriteria_produk_edit');
+$routes->post('/kriteria_produk/hapus', 'Admin::kriteria_produk_delete');
+
 $routes->get('/basis_pengetahuan', 'Admin::basis_pengetahuan');
 $routes->get('/akun', 'Admin::akun');
 

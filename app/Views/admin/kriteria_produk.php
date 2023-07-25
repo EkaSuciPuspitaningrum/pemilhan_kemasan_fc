@@ -1,7 +1,7 @@
 <?= $this->extend('layouts-admin/app') ?>
 
 <?= $this->section('title') ?>
-  <title>DS &mdash; Dempster Shafer</title>
+  <title>Pemilhan Kemasan &mdash; Kriteria Produk</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('link') ?>
@@ -29,11 +29,6 @@
                                             class="form-control"
                                             id="kriteria_produk" name="kriteria_produk">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="ketProduk">Keterangan Kemasan</label>
-                                        <textarea class="form-control" style="height: 150px" name="keterangan_produk"
-                                        required></textarea>
-                                    </div>
                                     <div style="text-align-last: center;">
                                             <button type="submit"
                                             class="btn btn-warning">Edit</button>
@@ -53,28 +48,30 @@
                         </div>
                         <div class="card-body">
                             <div> 
-                                <table id="table" class="table" style="text-align: center">
+                                <table id="table" class="table">
                                     <thead>
                                         <tr>
                                             <th style="text-align: center" scope="col">#</th>
-                                            <th style="text-align: center" scope="col">Kode Jenis</th>
-                                            <th style="text-align: center" scope="col">Jenis Kemasan</th>
-                                            <th style="text-align: center" scope="col">Keterangan Jenis Kemasan</th>
+                                            <!-- <th style="text-align: center" scope="col">Kode Kriteria</th> -->
+                                            <th style="text-align: center" scope="col">Kriteria Produk</th>
+                                            <th style="text-align: center" scope="col">Tanggal Pembuatan</th>
                                             <th style="text-align: center" scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody >
-                                        <!-- @foreach ($jenis_kemasan as $kemasan )
-                                        <tr>
-                                            <th>{{ $i++}}</th>
-                                            <td>{{$kemasan->id_kemasan}}</td>
-                                            <td>{{$kemasan->jenis_kemasan}}</td>
-                                            <td>{{$kemasan->keterangan_kemasan}}</td>
-                                            <td><a data-toggle="modal" href="{{ url('/kemasan_show/{id}',$kemasan->id) }}"  data-target="#editKemasan" type="button" class="btn btn-warning">Edit</a>
-                                                <a href="/kemasan/hapus/{{ $kemasan->id }}" type="button" class="btn btn-danger">Hapus</a>
-                                            </td>
-                                        </tr>
-                                        @endforeach -->
+                                            <?php 
+                                            $no = 1;
+                                            foreach ($kriteria as $r) : ?>
+                                                <tr>
+                                                <td style="text-align: center"><?php echo $no++ ?></td>
+                                                <td><?php echo $r->kriteria_produk ?></td>
+                                                <td style="text-align: center"><?php echo $r->created_date ?></td>
+                                                <td style="text-align: center">
+                                                <button class="btn btn-warning" href="<?php echo base_url('kriteria_produk/edit/'.$r->id);?>">EDIT</button>
+                                                    <button class="btn btn-danger" href="<?php echo base_url('kriteria_produk/hapus/'.$r->id);?>">HAPUS</button>
+                                                </td>
+                                                </tr>
+                                            <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>

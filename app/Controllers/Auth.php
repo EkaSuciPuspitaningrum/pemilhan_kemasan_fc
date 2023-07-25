@@ -15,31 +15,28 @@ class Auth extends BaseController
    {
 
             $session = session();
-            $userModel = new Admin();
+            $model = new Admin();
             $email = $this->request->getVar('email');
             $password = $this->request->getVar('password');
-            
-            $data = $userModel->where('email', $email)->first();
-            
+            $data = $model->where('email', $email)->first();
             if($data){
-                $pass = $data['password'];
-                $authenticatePassword = password_verify($password, $pass);
-                if($authenticatePassword){
+                $pass = $data['password_hash'];
+                $verify_pass = password_verify($password, $pass);
+                if($verify_pass){
                     $ses_data = [
-                        'id' => $data['id'],
-                        'name' => $data['name'],
-                        'email' => $data['email'],
-                        'isLoggedIn' => TRUE
+                        'id'       => $data['id'],
+                        'name'     => $data['name'],
+                        'email'    => $data['email'],
+                        'logged_in'     => TRUE
                     ];
                     $session->set($ses_data);
                     return redirect()->to('/dashboard_admin');
-                
                 }else{
-                    $session->setFlashdata('msg', 'Password is incorrect.');
+                    $session->setFlashdata('msg', 'Wrong Password');
                     return redirect()->to('/login_admin');
                 }
             }else{
-                $session->setFlashdata('msg', 'Email does not exist.');
+                $session->setFlashdata('msg', 'Email not Found');
                 return redirect()->to('/login_admin');
             }
         }

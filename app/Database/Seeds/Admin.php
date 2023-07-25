@@ -11,7 +11,9 @@ class Admin extends Seeder
         $data = [
             'name' => 'Admin',
             'email'    => 'admin@gmail.com',
-            'password'    => 'Admin',
+            'password'    => 'admin',
+            'password_hash'   =>password_hash(('admin'), PASSWORD_BCRYPT)
+            
         ];
 
         // Using Query Builder

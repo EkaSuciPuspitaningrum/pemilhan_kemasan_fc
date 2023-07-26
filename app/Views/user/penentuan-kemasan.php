@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="beratproduk">Berat Produk</label>
-                                    <input type="number"
+                                    <input type="text"
                                            class="form-control"
                                            id="beratproduk" required>
                                 </div>
@@ -57,7 +57,6 @@
                                         <thead class="bg-primary">
                                             <tr>
                                                 <th class="text-white text-center">No</th>
-                                                <th class="text-white text-center">Kode</th>
                                                 <th class="text-white text-center">Kriteria Produk</th>
                                                 <th class="text-white text-center">Pilih Kriteria Produk</th>
 
@@ -66,15 +65,17 @@
                                         </thead>
                                         <tbody class="bg-white">
                                             
+                                                <?php 
+                                            $no = 1;
+                                            foreach ($kriteria as $r) : ?>
                                                 <tr>
-                                                    <th class="text-center"></th>
-                                                    <th class="text-center"></th>
-                                                    <th></th>
-                                                    <th class="text-center">
-                                                        <input class="form-check-input" type="checkbox" name="choiceRadio[]"
-                                                        id="defaultCheck1" value="">
-                                                    </th>
+                                                <td style="text-align: center"><?php echo $no++ ?></td>
+                                                <td><?php echo $r->kriteria_produk ?></td>
+                                                <td style="text-align: center">
+                                                <input class="form-check-input" type="checkbox" id="defaultCheck1">
+                                                </td>
                                                 </tr>
+                                            <?php endforeach ?>
                                         </tbody>
                                     </table>
                                 </div>

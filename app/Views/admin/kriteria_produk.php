@@ -17,12 +17,33 @@
         <div class="section-body">
             <h2 class="section-title">Kriteria Produk</h2>
             <p class="section-lead">Silahkan tambahkan, ubah maupun hapus data kriteria-kriteria produk.</p>
+            <br>
+            <?php if(session()->getFlashdata('sukses')):?>
+                    <div class="alert alert-success alert-dismissible show fade">
+                      <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        <?= session()->getFlashdata('sukses') ?>
+                      </div>
+                </div>
+            <?php endif;?>
+            <?php if(session()->getFlashdata('gagal')):?>
+                    <div class="alert alert-danger alert-dismissible show fade">
+                      <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        <?= session()->getFlashdata('gagal') ?>
+                      </div>
+                </div>
+            <?php endif;?>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             
-                            <form action="" method="POST">
+                            <form action="<?php echo base_url('kriteria_produk');?>" method="POST">
                                     <div class="form-group">
                                         <label for="kriteriaProduk">Kriteria Produk</label>
                                         <input type="text"
@@ -30,8 +51,6 @@
                                             id="kriteria_produk" name="kriteria_produk">
                                     </div>
                                     <div style="text-align-last: center;">
-                                            <button type="submit"
-                                            class="btn btn-warning">Edit</button>
                                         <button type="submit"
                                             class="btn btn-primary">Tambah</button>
                                      </div>
@@ -52,7 +71,7 @@
                                     <thead>
                                         <tr>
                                             <th style="text-align: center" scope="col">#</th>
-                                            <!-- <th style="text-align: center" scope="col">Kode Kriteria</th> -->
+                                            <th style="text-align: center" scope="col">Kode Kriteria</th>
                                             <th style="text-align: center" scope="col">Kriteria Produk</th>
                                             <th style="text-align: center" scope="col">Tanggal Pembuatan</th>
                                             <th style="text-align: center" scope="col">Action</th>
@@ -64,6 +83,7 @@
                                             foreach ($kriteria as $r) : ?>
                                                 <tr>
                                                 <td style="text-align: center"><?php echo $no++ ?></td>
+                                                <td style="text-align: center">P<?php echo $r->id ?></td>
                                                 <td><?php echo $r->kriteria_produk ?></td>
                                                 <td style="text-align: center"><?php echo $r->created_date ?></td>
                                                 <td style="text-align: center">

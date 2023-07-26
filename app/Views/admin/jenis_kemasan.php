@@ -17,26 +17,27 @@
         <div class="section-body">
             <h2 class="section-title">Jenis Kemasan</h2>
             <p class="section-lead">Silahkan tambahkan, ubah maupun hapus data jenis-jenis kemasan.</p>
-            <?php if (!empty(session()->getFlashdata('success'))) : ?>
-                <div class="alert alert-succsess alert-dismissible show fade">
+            <br>
+            <?php if(session()->getFlashdata('sukses')):?>
+                    <div class="alert alert-success alert-dismissible show fade">
                       <div class="alert-body">
                         <button class="close" data-dismiss="alert">
                           <span>&times;</span>
                         </button>
-                        <?= session()->getFlashdata('success') ?>
+                        <?= session()->getFlashdata('sukses') ?>
                       </div>
                 </div>
-            <?php endif ?>
-            <?php if (!empty(session()->getFlashdata('error'))) : ?>
-                <div class="alert alert-danger alert-dismissible show fade">
+            <?php endif;?>
+            <?php if(session()->getFlashdata('gagal')):?>
+                    <div class="alert alert-danger alert-dismissible show fade">
                       <div class="alert-body">
                         <button class="close" data-dismiss="alert">
                           <span>&times;</span>
                         </button>
-                        <?= session()->getFlashdata('error') ?>
+                        <?= session()->getFlashdata('gagal') ?>
                       </div>
                 </div>
-            <?php endif ?>
+            <?php endif;?>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -55,8 +56,6 @@
                                         required></textarea>
                                     </div>
                                     <div style="text-align-last: center;">
-                                            <button type="submit"
-                                            class="btn btn-warning">Edit</button>
                                         <button type="submit"
                                             class="btn btn-primary">Tambah</button>
                                      </div>
@@ -77,7 +76,7 @@
                                     <thead>
                                         <tr>
                                             <th style="text-align: center" scope="col">#</th>
-                                            <!-- <th style="text-align: center" scope="col">Kode Jenis</th> -->
+                                            <th style="text-align: center" scope="col">Kode Jenis</th>
                                             <th style="text-align: center" scope="col">Jenis Kemasan</th>
                                             <th style="text-align: center" scope="col">Keterangan Jenis Kemasan</th>
                                             <th style="text-align: center" scope="col">Tanggal Pembuatan</th>
@@ -90,6 +89,7 @@
                                             foreach ($data as $r) : ?>
                                                 <tr>
                                                 <td style="text-align: center"><?php echo $no++ ?></td>
+                                                <td style="text-align: center">K<?php echo $r->id ?></td>
                                                 <td><?php echo $r->jenis_kemasan ?></td>
                                                 <td><?php echo $r->keterangan_kemasan ?></td>
                                                 <td style="text-align: center"><?php echo $r->created_date ?></td>

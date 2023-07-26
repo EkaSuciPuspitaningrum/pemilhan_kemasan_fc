@@ -15,10 +15,6 @@ class BasisPengetahuan extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'id_pengetahuan' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '100',
-            ],
             'jenis_kemasan' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',

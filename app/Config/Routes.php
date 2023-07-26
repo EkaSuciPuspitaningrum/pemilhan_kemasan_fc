@@ -48,7 +48,12 @@ $routes->get('/kriteria_produk/edit', 'Admin::kriteria_produk_edit');
 $routes->post('/kriteria_produk/hapus', 'Admin::kriteria_produk_delete');
 
 $routes->get('/basis_pengetahuan', 'Admin::basis_pengetahuan');
+$routes->post('/basis_pengetahuan', 'Admin::basis_pengetahuan_create');
+
 $routes->get('/akun', 'Admin::akun');
+
+
+
 
 $routes->get('/pencarian_kemasan', 'User::pencarian_kemasan');
 $routes->get('/riwayat_pencarian', 'User::riwayat_pencarian');

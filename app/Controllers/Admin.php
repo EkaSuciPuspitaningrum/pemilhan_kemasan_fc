@@ -8,6 +8,18 @@ use App\Models\KriteriaProduk;
 
 class Admin extends BaseController
 {  
+    protected $jeniskemasan;
+    protected $kriteriaproduk;
+    protected $pengetahuan;
+
+ 
+    function __construct()
+    {
+        $this->jeniskemasan = new JenisKemasan();
+        $this->kriteriaproduk = new KriteriaProduk();
+        $this->pengetahuan = new BasisPengetahuan();
+
+    }
 
     public function dashboard_admin()
     {
@@ -26,23 +38,24 @@ class Admin extends BaseController
 
     public function jenis_kemasan_create()
     {
+        $session = session();
+
         $rules = [
             'jenis_kemasan'          => 'required',
-            'kriteria_kemasan'       => 'required',
+            'keterangan_kemasan'       => 'required',
         ];
         
           
         if($this->validate($rules)){
-            $model = new JenisKemasan();
-            $data = [
-                'jenis_kemasan'     => $this->request->getVar('jenis_kemasan'),
-                'kriteria_kemasan'    => $this->request->getVar('kriteria_kemasan'),
-            ];
-            $model->save($data);
-            session()->setFlashdata('success', 'Data berhasil ditambah');
+            $this->jeniskemasan->insert([
+                'jenis_kemasan'     => $this->request->getPost('jenis_kemasan'),
+                'keterangan_kemasan'    => $this->request->getPost('keterangan_kemasan')
+            ]);
+            
+            $session->setFlashdata('sukses', 'Data berhasil ditambah.');
             return redirect()->to('/jenis_kemasan');
         }else{
-            session()->setFlashdata('error', 'Data gagal ditambah');
+            $session->setFlashdata('gagal', 'Data gagal ditambah.');
             return redirect()->to('/jenis_kemasan');
         }
     }
@@ -57,12 +70,44 @@ class Admin extends BaseController
         ]);
     }
 
+    public function kriteria_produk_create()
+    {
+        $session = session();
+
+        $rules = [
+            'kriteria_produk'       => 'required',
+        ];
+        
+          
+        if($this->validate($rules)){
+            $this->kriteriaproduk->insert([
+                'kriteria_produk'    => $this->request->getPost('kriteria_produk')
+            ]);
+            
+            $session->setFlashdata('sukses', 'Data berhasil ditambah.');
+            return redirect()->to('/kriteria_produk');
+        }else{
+            $session->setFlashdata('gagal', 'Data gagal ditambah.');
+            return redirect()->to('/kriteria_produk');
+        }
+    }
+
+
     public function basis_pengetahuan()
     {
+        $jeniskemasan = new JenisKemasan();
+        $kemasan = $jeniskemasan->findAll();
+       
+        $kriteriaproduk = new KriteriaProduk();
+        $kriteria = $kriteriaproduk->findAll();
+        
         $pengetahuan = new BasisPengetahuan();
         $data = $pengetahuan->findAll();
         return view('admin/basis_pengetahuan', [
-            'data' => $data
+            'data' => $data,
+            'kemasan' => $kemasan,
+            'kriteria' => $kriteria,
+            
         ]);
     }
 

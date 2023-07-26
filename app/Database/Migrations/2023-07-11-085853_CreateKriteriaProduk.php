@@ -15,10 +15,6 @@ class CreateKriteriaProduk extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'id_kriteria' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '100',
-            ],
             'kriteria_produk' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',

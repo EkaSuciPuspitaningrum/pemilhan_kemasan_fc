@@ -24,10 +24,34 @@
                             
                             <form action="" method="POST">
                                     <div class="form-group">
-                                        <label for="kriteriaKemasan">Jenis Kemasan</label>
-                                        <input type="text"
-                                            class="form-control"
-                                            id="jenis_kemasan" name="jenis_kemasan" required>
+                                        <label>Jenis Kemasan</label>
+                                        <select class="form-control">
+                                            <option>Pilih Jenis Kemasan</option>
+                                            <?php
+                                            if(!empty($kemasan)){
+                                                foreach($kemasan as $u){
+                                        ?>            
+                                                    <option value="<?php echo $u['id']; ?>"><?php echo $u['jenis_kemasan']; ?></option>
+                                        <?php 
+                                                }
+                                            }
+                                        ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Kriteria Produk</label>
+                                        <select class="form-control">
+                                            <option>Pilih Kriteria Produk</option>
+                                            <?php
+                                            if(!empty($kriteria)){
+                                                foreach($kriteria as $u){
+                                        ?>            
+                                                    <option value="<?php echo $u['id']; ?>"><?php echo $u['kriteria_produk']; ?></option>
+                                        <?php 
+                                                }
+                                            }
+                                        ?>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="kriteriaKemasan">Kriteria Produk</label>
@@ -58,7 +82,7 @@
                                     <thead>
                                         <tr>
                                             <th style="text-align: center" scope="col">#</th>
-                                            <!-- <th style="text-align: center" scope="col">Kode Pengetahuan</th> -->
+                                            <th style="text-align: center" scope="col">Kode Pengetahuan</th>
                                             <th style="text-align: center" scope="col">Jenis Kemasan</th>
                                             <th style="text-align: center" scope="col">Kriteria Produk</th>
                                             <th style="text-align: center" scope="col">Action</th>
@@ -70,6 +94,7 @@
                                             foreach ($data as $r) : ?>
                                                 <tr>
                                                 <td style="text-align: center"><?php echo $no++ ?></td>
+                                                <td style="text-align: center">BP<?php echo $r->id ?></td>
                                                 <td><?php echo $r->jenis_kemasan ?></td>
                                                 <td><?php echo $r->kriteria_produk ?></td>
                                                 <td style="text-align: center">

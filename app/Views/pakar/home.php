@@ -1,7 +1,7 @@
-<?= $this->extend('layouts-user/app') ?>
+<?= $this->extend('layouts-admin/app') ?>
 
 <?= $this->section('title') ?>
-<title>Pencarian Kemasan &mdash; Forward Chaining</title>
+  <title>DS &mdash; Dempster Shafer</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

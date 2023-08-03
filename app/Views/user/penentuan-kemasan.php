@@ -1,7 +1,7 @@
 <?= $this->extend('layouts-user/app') ?>
 
 <?= $this->section('title') ?>
-  <title>DS &mdash; Dempster Shafer</title>
+<title>Pencarian Kemasan &mdash; Forward Chaining</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('link') ?>
@@ -78,11 +78,12 @@
                                             <?php endforeach ?>
                                         </tbody>
                                     </table>
+                                    <br> <br>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-center">
+                                        <button class="btn btn-primary" type="submit"><i class="fas fa-solid fa-magnifying-glass"></i>  Analisis</button>
+                                    </div>
                                 </div>
-                                <div class="d-grid gap-2 d-md-flex justify-content-center">
-                                    <button class="btn btn-primary" type="submit"><i class="fas fa-save mr-1"></i> Simpan
-                                        Data</button>
-                                </div>
+                                
                             </div>
                         </form>
                     </div>

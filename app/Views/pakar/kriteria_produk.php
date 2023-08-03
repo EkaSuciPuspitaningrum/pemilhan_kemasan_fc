@@ -1,7 +1,7 @@
 <?= $this->extend('layouts-admin/app') ?>
 
 <?= $this->section('title') ?>
-  <title>Pemilhan Kemasan &mdash; Pengetahuan</title>
+  <title>Pemilhan Kemasan &mdash; Kriteria Produk</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('link') ?>
@@ -12,40 +12,43 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Basis Pengetahuan</h1>
+            <h1>Kriteria Produk</h1>
         </div>
         <div class="section-body">
-            <h2 class="section-title">Basis Pengetahuan</h2>
-            <p class="section-lead">Silahkan tambahkan, ubah maupun hapus data pengetahuan.</p>
+            <h2 class="section-title">Kriteria Produk</h2>
+            <p class="section-lead">Silahkan tambahkan, ubah maupun hapus data kriteria-kriteria produk.</p>
+            <br>
+            <?php if(session()->getFlashdata('sukses')):?>
+                    <div class="alert alert-success alert-dismissible show fade">
+                      <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        <?= session()->getFlashdata('sukses') ?>
+                      </div>
+                </div>
+            <?php endif;?>
+            <?php if(session()->getFlashdata('gagal')):?>
+                    <div class="alert alert-danger alert-dismissible show fade">
+                      <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        <?= session()->getFlashdata('gagal') ?>
+                      </div>
+                </div>
+            <?php endif;?>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             
-                            <form action="" method="POST">
+                            <form action="<?php echo base_url('kriteria_produk');?>" method="POST">
                                     <div class="form-group">
-                                        <label>Jenis Kemasan</label>
-                                        <select class="form-control">
-                                            <option>Pilih Jenis Kemasan</option>
-                                            <?php
-                                                foreach($kemasan as $u)
-                                                {
-                                                    echo '<option value="'.$u->id.'">'.$u->jenis_kemasan.'</option>';
-                                                }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Kriteria Produk</label>
-                                        <select class="form-control">
-                                            <option>Pilih Kriteria Produk</option>
-                                            <?php
-                                                foreach($kriteria as $u)
-                                                {
-                                                    echo '<option value="'.$u->id.'">'.$u->kriteria_produk.'</option>';
-                                                }
-                                            ?>
-                                        </select>
+                                        <label for="kriteriaProduk">Kriteria Produk</label>
+                                        <input type="text"
+                                            class="form-control"
+                                            id="kriteria_produk" name="kriteria_produk">
                                     </div>
                                     <div style="text-align-last: center;">
                                         <button type="submit"
@@ -59,7 +62,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div>
-                                <h4>Data Pengetahuan</h4>
+                                <h4>Data Kemasan</h4>
                             </div>
                         </div>
                         <div class="card-body">
@@ -68,21 +71,21 @@
                                     <thead>
                                         <tr>
                                             <th style="text-align: center" scope="col">#</th>
-                                            <th style="text-align: center" scope="col">Kode Pengetahuan</th>
-                                            <th style="text-align: center" scope="col">Jenis Kemasan</th>
+                                            <th style="text-align: center" scope="col">Kode Kriteria</th>
                                             <th style="text-align: center" scope="col">Kriteria Produk</th>
+                                            <th style="text-align: center" scope="col">Tanggal Pembuatan</th>
                                             <th style="text-align: center" scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody >
-                                    <?php 
+                                            <?php 
                                             $no = 1;
-                                            foreach ($data as $r) : ?>
+                                            foreach ($kriteria as $r) : ?>
                                                 <tr>
                                                 <td style="text-align: center"><?php echo $no++ ?></td>
-                                                <td style="text-align: center">BP<?php echo $r->id ?></td>
-                                                <td><?php echo $r->jenis_kemasan ?></td>
+                                                <td style="text-align: center">P<?php echo $r->id ?></td>
                                                 <td><?php echo $r->kriteria_produk ?></td>
+                                                <td style="text-align: center"><?php echo $r->created_date ?></td>
                                                 <td style="text-align: center">
                                                 <button class="btn btn-warning" href="<?php echo base_url('kriteria_produk/edit/'.$r->id);?>">EDIT</button>
                                                     <button class="btn btn-danger" href="<?php echo base_url('kriteria_produk/hapus/'.$r->id);?>">HAPUS</button>

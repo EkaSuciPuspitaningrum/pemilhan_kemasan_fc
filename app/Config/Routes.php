@@ -31,21 +31,29 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+//autentikasi (login, regis dan kawan2)
 $routes->get('/login_admin', 'Auth::login_admin');
 $routes->post('/login_admin', 'Auth::aksi_login');
+
+$routes->get('/login_pakar', 'Auth::login_pakar');
+$routes->post('/login_pakar', 'Auth::aksi_login_pakar');
+$routes->get('/registrasi_pakar', 'Auth::registrasi_pakar');
+$routes->post('/registrasi_pakar', 'Auth::registrasi');
+
+
 
 
 $routes->get('/dashboard_admin', 'Admin::dashboard_admin');
 
 $routes->get('/jenis_kemasan', 'Admin::jenis_kemasan');
-$routes->post('/jenis_kemasan', 'Admin::jenis_kemasan_create');
+$routes->post('/jenis_kemasan_admin', 'Admin::jenis_kemasan_create');
 $routes->get('/jenis_kemasan/edit', 'Admin::jenis_kemasan_edit');
-$routes->post('/jenis_kemasan/hapus', 'Admin::jenis_kemasan_delete');
+$routes->get('/jenis_kemasan/hapus', 'Admin::jenis_kemasan_delete');
 
 $routes->get('/kriteria_produk', 'Admin::kriteria_produk');
 $routes->post('/kriteria_produk', 'Admin::kriteria_produk_create');
 $routes->get('/kriteria_produk/edit', 'Admin::kriteria_produk_edit');
-$routes->post('/kriteria_produk/hapus', 'Admin::kriteria_produk_delete');
+$routes->post('/kriteria_produk/hapus(:num)', 'Admin::kriteria_produk_delete/$1');
 
 $routes->get('/basis_pengetahuan', 'Admin::basis_pengetahuan');
 $routes->post('/basis_pengetahuan', 'Admin::basis_pengetahuan_create');
@@ -53,7 +61,19 @@ $routes->post('/basis_pengetahuan', 'Admin::basis_pengetahuan_create');
 $routes->get('/akun', 'Admin::akun');
 
 
+$routes->get('/dashboard_pakar', 'Pakar::dashboard_pakar');
 
+$routes->get('/akun_pakar', 'Pakar::akun');
+
+$routes->get('/jenis_kemasan_pakar', 'Pakar::jenis_kemasan');
+$routes->post('/jenis_kemasan_pakar', 'Pakar::jenis_kemasan_create');
+$routes->get('/jenis_kemasan_pakar/edit', 'Pakar::jenis_kemasan_edit');
+$routes->get('/jenis_kemasan_pakar/hapus(:num)', 'Pakar::jenis_kemasan_delete/$1');
+
+$routes->get('/kriteria_produk_pakar', 'Pakar::kriteria_produk');
+$routes->post('/kriteria_produk_pakar', 'Pakar::kriteria_produk_create');
+$routes->get('/kriteria_produk_pakar/edit', 'Pakar::kriteria_produk_edit');
+$routes->post('/kriteria_produk_pakar/hapus(:num)', 'Pakar::kriteria_produk_delete/$1');
 
 $routes->get('/pencarian_kemasan', 'User::pencarian_kemasan');
 $routes->get('/riwayat_pencarian', 'User::riwayat_pencarian');

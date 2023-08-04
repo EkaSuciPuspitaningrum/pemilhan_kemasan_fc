@@ -2,12 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Controllers\BaseController;
 use App\Models\BasisPengetahuan;
 use App\Models\JenisKemasan;
 use App\Models\KriteriaProduk;
 
-class Admin extends BaseController
-{  
+class Pakar extends BaseController
+{
     protected $jeniskemasan;
     protected $kriteriaproduk;
     protected $pengetahuan;
@@ -21,9 +22,9 @@ class Admin extends BaseController
 
     }
 
-    public function dashboard_admin()
+    public function dashboard_pakar()
     {
-        return view('admin/home');
+        return view('pakar/home');
     }
 
     public function jenis_kemasan()
@@ -31,7 +32,7 @@ class Admin extends BaseController
         $kemasan = new JenisKemasan();
         $data = $kemasan->findAll();
         
-        return view('admin/jenis_kemasan', [
+        return view('pakar/jenis_kemasan', [
             'data' => $data
         ]);
     }
@@ -53,10 +54,10 @@ class Admin extends BaseController
             ]);
             
             $session->setFlashdata('sukses', 'Data berhasil ditambah.');
-            return redirect()->to('/jenis_kemasan');
+            return redirect()->to('/jenis_kemasan_pakar');
         }else{
             $session->setFlashdata('gagal', 'Data gagal ditambah.');
-            return redirect()->to('/jenis_kemasan');
+            return redirect()->to('/jenis_kemasan_pakar');
         }
     }
 
@@ -65,7 +66,7 @@ class Admin extends BaseController
         $kemasan = new JenisKemasan();
         $kemasan->delete($id);
         
-        return view('admin/jenis_kemasan', [
+        return view('pakar/jenis_kemasan', [
         ]);
     }
 
@@ -74,7 +75,7 @@ class Admin extends BaseController
         
         $kriteriaa = new KriteriaProduk();
         $kriteria = $kriteriaa->findAll();
-        return view('admin/kriteria_produk', [
+        return view('pakar/kriteria_produk', [
             'kriteria' => $kriteria
         ]);
     }
@@ -94,10 +95,10 @@ class Admin extends BaseController
             ]);
             
             $session->setFlashdata('sukses', 'Data berhasil ditambah.');
-            return redirect()->to('/kriteria_produk');
+            return redirect()->to('/kriteria_produk_pakar');
         }else{
             $session->setFlashdata('gagal', 'Data gagal ditambah.');
-            return redirect()->to('/kriteria_produk');
+            return redirect()->to('/kriteria_produk_pakar');
         }
     }
 
@@ -112,7 +113,7 @@ class Admin extends BaseController
         
         $pengetahuan = new BasisPengetahuan();
         $data = $pengetahuan->findAll();
-        return view('admin/basis_pengetahuan', [
+        return view('pakar/basis_pengetahuan', [
             'data' => $data,
             'kemasan' => $kemasan,
             'kriteria' => $kriteria,
@@ -120,8 +121,4 @@ class Admin extends BaseController
         ]);
     }
 
-    public function akun()
-    {
-        return view('admin/akun');
-    }
 }

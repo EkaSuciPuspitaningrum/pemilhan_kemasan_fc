@@ -42,7 +42,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">   
-                            <form action="<?php echo base_url('jenis_kemasan');?>" method="POST">
+                            <form action="<?php echo base_url('jenis_kemasan_admin');?>" method="POST">
                                     <div class="form-group">
                                         <label for="jenis_kemasan">Jenis Kemasan</label>
                                         <input type="text"
@@ -94,8 +94,8 @@
                                                 <td><?php echo $r->keterangan_kemasan ?></td>
                                                 <td style="text-align: center"><?php echo $r->created_date ?></td>
                                                 <td style="text-align: center">
-                                                <button class="btn btn-warning" href="<?php echo base_url('jenis_kemasan/edit/'.$r->id);?>">EDIT</button>
-                                                    <button class="btn btn-danger" href="<?php echo base_url('jenis_kemasan/hapus/'.$r->id);?>">HAPUS</button>
+                                                <button class="btn btn-warning" href="<?php echo base_url('jenis_kemasan/edit'.$r->id);?>">EDIT</button>
+                                                    <button class="btn btn-danger" href="<?php echo base_url('jenis_kemasan/hapus'.$r->id);?>">HAPUS</button>
                                                 </td>
                                                 </tr>
                                             <?php endforeach ?>

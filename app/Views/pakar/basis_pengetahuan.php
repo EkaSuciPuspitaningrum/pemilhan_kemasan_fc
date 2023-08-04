@@ -1,4 +1,4 @@
-<?= $this->extend('layouts-admin/app') ?>
+<?= $this->extend('layouts-pakar/app') ?>
 
 <?= $this->section('title') ?>
   <title>Pemilhan Kemasan &mdash; Pengetahuan</title>

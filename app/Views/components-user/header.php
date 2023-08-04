@@ -14,6 +14,8 @@
     <ul class="navbar-nav navbar-right">
         <div class="row">
             <div class="buttons">
+                <a href="<?php echo base_url('/login_pakar');?>"
+                    class="btn btn-success">Login Pakar</a>
                 <a href="<?php echo base_url('/login_admin');?>"
                     class="btn btn-warning">Login Admin</a>
             </div>

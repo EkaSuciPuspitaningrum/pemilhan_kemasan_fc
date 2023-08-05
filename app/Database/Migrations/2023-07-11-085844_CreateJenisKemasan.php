@@ -27,7 +27,7 @@ class CreateJenisKemasan extends Migration
             'updated_date datetime default current_timestamp on update current_timestamp', 
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('jenis_kemasan');
+        $this->forge->createTable('jenis_kemasan', true);
     }
 
     public function down()

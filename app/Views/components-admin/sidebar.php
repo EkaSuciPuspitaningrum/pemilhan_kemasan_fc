@@ -24,7 +24,7 @@
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-box-open"></i><span>Kemasan</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="<?php echo base_url('/jenis_kemasan');?>">Jenis Kemasan</a></li>
+                <li><a class="nav-link" href="<?php echo base_url('/jenis_kemasan_admin');?>">Jenis Kemasan</a></li>
                 <li><a class="nav-link" href="<?php echo base_url('/kriteria_produk');?>">Kriteria Produk</a></li>
                 <li><a class="nav-link" href="<?php echo base_url('/basis_pengetahuan');?>">Basis Pengetahuan</a></li>
               </ul>

@@ -45,10 +45,11 @@ $routes->post('/registrasi_pakar', 'Auth::registrasi');
 
 $routes->get('/dashboard_admin', 'Admin::dashboard_admin');
 
-$routes->get('/jenis_kemasan', 'Admin::jenis_kemasan');
+$routes->get('/jenis_kemasan_admin', 'Admin::jenis_kemasan');
 $routes->post('/jenis_kemasan_admin', 'Admin::jenis_kemasan_create');
-$routes->get('/jenis_kemasan/edit', 'Admin::jenis_kemasan_edit');
-$routes->get('/jenis_kemasan/hapus', 'Admin::jenis_kemasan_delete');
+$routes->get('/jenis_kemasan_admin/edit/(:segment)', 'Admin::jenis_kemasan_edit/$1');
+$routes->post('/jenis_kemasan_admin/update/(:segment)', 'Admin::jenis_kemasan_update/$1');
+$routes->get('/jenis_kemasan_admin/hapus/(:segment)', 'Admin::jenis_kemasan_delete/$1');
 
 $routes->get('/kriteria_produk', 'Admin::kriteria_produk');
 $routes->post('/kriteria_produk', 'Admin::kriteria_produk_create');
@@ -61,19 +62,20 @@ $routes->post('/basis_pengetahuan', 'Admin::basis_pengetahuan_create');
 $routes->get('/akun', 'Admin::akun');
 
 
-$routes->get('/dashboard_pakar', 'Pakar::dashboard_pakar');
+// $routes->get('/dashboard_pakar', 'Pakar::dashboard_pakar');
 
-$routes->get('/akun_pakar', 'Pakar::akun');
+// $routes->get('/akun_pakar', 'Pakar::akun');
 
-$routes->get('/jenis_kemasan_pakar', 'Pakar::jenis_kemasan');
-$routes->post('/jenis_kemasan_pakar', 'Pakar::jenis_kemasan_create');
-$routes->get('/jenis_kemasan_pakar/edit', 'Pakar::jenis_kemasan_edit');
-$routes->get('/jenis_kemasan_pakar/hapus(:num)', 'Pakar::jenis_kemasan_delete/$1');
+// $routes->get('/jenis_kemasan_pakar', 'Pakar::jenis_kemasan');
+// $routes->post('/jenis_kemasan_pakar', 'Pakar::jenis_kemasan_create');
+// $routes->get('/jenis_kemasan_pakar/edit/(:segment)', 'Pakar::jenis_kemasan_edit/$1');
+// $routes->post('/jenis_kemasan_pakar/update/(:segment)', 'Pakar::jenis_kemasan_update/$1');
+// $routes->get('/jenis_kemasan_pakar/hapus/(:segment)', 'Pakar::jenis_kemasan_delete/$1');
 
-$routes->get('/kriteria_produk_pakar', 'Pakar::kriteria_produk');
-$routes->post('/kriteria_produk_pakar', 'Pakar::kriteria_produk_create');
-$routes->get('/kriteria_produk_pakar/edit', 'Pakar::kriteria_produk_edit');
-$routes->post('/kriteria_produk_pakar/hapus(:num)', 'Pakar::kriteria_produk_delete/$1');
+// $routes->get('/kriteria_produk_pakar', 'Pakar::kriteria_produk');
+// $routes->post('/kriteria_produk_pakar', 'Pakar::kriteria_produk_create');
+// $routes->get('/kriteria_produk_pakar/edit', 'Pakar::kriteria_produk_edit');
+// $routes->post('/kriteria_produk_pakar/hapus(:num)', 'Pakar::kriteria_produk_delete/$1');
 
 $routes->get('/pencarian_kemasan', 'User::pencarian_kemasan');
 $routes->get('/riwayat_pencarian', 'User::riwayat_pencarian');

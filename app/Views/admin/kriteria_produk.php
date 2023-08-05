@@ -39,10 +39,12 @@
                 </div>
             <?php endif;?>
             <div class="row">
-                <div class="col-12">
+                <div class="col-6">
                     <div class="card">
+                        <div class="card-header">
+                            <h4>Tambah Data</h4>
+                        </div>
                         <div class="card-body">
-                            
                             <form action="<?php echo base_url('kriteria_produk');?>" method="POST">
                                     <div class="form-group">
                                         <label for="kriteriaProduk">Kriteria Produk</label>
@@ -55,9 +57,33 @@
                                             class="btn btn-primary">Tambah</button>
                                      </div>
                             </form>
-
                         </div>
                     </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Edit Data</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="<?php echo base_url('kriteria_produk');?>" method="POST">
+                                    <div class="form-group">
+                                        <label for="kriteriaProduk">Kriteria Produk</label>
+                                        <input type="text"
+                                            class="form-control"
+                                            id="kriteria_produk" name="kriteria_produk">
+                                    </div>
+                                    <div style="text-align-last: center;">
+                                        <button type="submit"
+                                            class="btn btn-warning">Edit</button>
+                                     </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
                     <br>
                     <div class="card">
                         <div class="card-header">

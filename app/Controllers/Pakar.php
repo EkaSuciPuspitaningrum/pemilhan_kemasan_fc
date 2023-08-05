@@ -70,6 +70,20 @@ class Pakar extends BaseController
         ]);
     }
 
+    public function jenis_kemasan_edit($id)
+    {
+        
+        $this->jeniskemasan->update($id, [
+            'id' => $this->request->getPost('id'),
+            'jenis_kemasan' => $this->request->getPost('jenis_kemasan'),
+            'keterangan_kemasan' => $this->request->getPost('keterangan_kemasan'),
+            'created_date' => $this->request->getPost('created_date'),
+            'updated_date' => $this->request->getPost('updated_date'),
+            ]);
+
+            return redirect('pakar/jenis_kemasan')->with('success', 'Data Updated Successfully');
+    }
+
     public function kriteria_produk()
     {
         

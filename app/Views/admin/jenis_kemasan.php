@@ -71,25 +71,27 @@
                     <div class="card-header">
                         <h4>Edit Data</h4>
                     </div>
-                        <div class="card-body">   
-                            <form action="<?php echo base_url('jenis_kemasan_admin');?>" method="POST">
+                        <div class="card-body">  
+                        <?php foreach ($dataa as $data) : ?> 
+                            <form action="<?php echo base_url('jenis_kemasan');?>" method="POST">
                                     <div class="form-group">
                                         <label for="jenis_kemasan">Jenis Kemasan</label>
                                         <input type="text"
                                             class="form-control"
-                                            id="jenis_kemasan" name="jenis_kemasan" required>
+                                            id="jenis_kemasan" name="jenis_kemasan" value="<?= $dataa['jenis_kemasan']; ?>">
                                             <code>* Isi dengan jenis dan bahan, contoh : Plastik PVC</code>
                                     </div>
                                     <div class="form-group">
                                         <label for="keterangan_kemasan">Keterangan Kemasan</label>
                                         <textarea class="form-control" style="height: 150px" name="keterangan_kemasan"
-                                        required></textarea>
+                                        required><?= $dataa['keterangan_kemasan']; ?></textarea>
                                     </div>
                                     <div style="text-align-last: center;">
                                         <button type="submit"
                                             class="btn btn-warning">Edit</button>
                                      </div>
                             </form>
+                            <?php endforeach ?>
                         </div>
                     </div>
                 </div>
@@ -135,7 +137,7 @@
                                                 </button> -->
                                                 
 
-                                                    <button class="btn btn-warning" href="<?php echo base_url('jenis_kemasan/edit'.$r->id);?>">EDIT</button>
+                                                    <button class="btn btn-warning" href="/jenis_kemasan/edit/<?= $r['id']; ?>">EDIT</button>
                                                     <button class="btn btn-danger" href="<?php echo base_url('jenis_kemasan/delete'.$r->id);?>">HAPUS</button>
                                                 </td>
                                                 </tr>

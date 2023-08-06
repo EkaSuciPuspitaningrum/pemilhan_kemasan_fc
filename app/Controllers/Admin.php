@@ -90,9 +90,11 @@ class Admin extends BaseController
     public function jenis_kemasan_edit($id)
     {
         $kemasan = new JenisKemasan();
-        $data['data'] = $kemasan->find($id);
-
-        return view('admin/jenis_kemasan', $data);
+        $dataa = $kemasan->find($id); 
+        
+        return view('admin/jenis_kemasan', [
+            'dataa' => $dataa
+        ]);
     }
 
     public function jenis_kemasan_update($id)

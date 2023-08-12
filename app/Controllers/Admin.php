@@ -5,12 +5,14 @@ namespace App\Controllers;
 use App\Models\BasisPengetahuan;
 use App\Models\JenisKemasan;
 use App\Models\KriteriaProduk;
+use App\Models\DataAdmin;
 
 class Admin extends BaseController
 {  
     protected $jeniskemasan;
     protected $kriteriaproduk;
     protected $pengetahuan;
+    protected $dataadmin;
 
  
     function __construct()
@@ -18,6 +20,7 @@ class Admin extends BaseController
         $this->jeniskemasan = new JenisKemasan();
         $this->kriteriaproduk = new KriteriaProduk();
         $this->pengetahuan = new BasisPengetahuan();
+        $this->dataadmin = new DataAdmin();
 
     }
     
@@ -200,12 +203,99 @@ class Admin extends BaseController
 
     }
 
+    //data admin
+    public function data_admin($id)
+    {
+        $dataadmin = new DataAdmin();
+        $dataa = $dataadmin->findAll();
 
-public function logout() 
-{
-   session()->destroy();
-   return redirect()->to(base_url('/'));
-}
+        return view('admin/data-admin', [
+            'dataa' => $data
+        ]);
+    }
+
+    //simpan data admin
+    public function data_admin_create()
+    {
+        $session = session();
+
+        $rules = [
+            'data_admin'          => 'required',
+            'keterangan_data-admin'       => 'required',
+        ];
+        
+          
+        if($this->validate($rules)){
+            $this->jeniskemasan->insert([
+                'data_admin'     => $this->request->getPost('data_admin'),
+                'keterangan_data_admin'    => $this->request->getPost('keterangan_data_admin')
+            ]);
+            
+            $session->setFlashdata('sukses', 'Data berhasil ditambah.');
+            return redirect()->to('/data-admin_admin');
+        }else{
+            $session->setFlashdata('gagal', 'Data gagal ditambah.');
+            return redirect()->to('/data-admin_admin');
+        }
+    }
+
+    //hapus data admin
+    public function data_admin_delete($id)
+    {
+        $dataadmin = new DataAdmin();
+        $dataadmin->delete($id);
+        
+        return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
+
+    }
+
+    //edit data admin
+    public function add_edit_data_admin($id = null)
+    {
+        $dataadmin = new DataAdmin();
+        $dataa = $dataadmin->findAll();
+
+        $data = [];
+
+        if ($id !== null) {
+            $kemasan = new JenisKemasan();
+            $data = $kemasan->find($id);
+        }
+        if ($this->request->getMethod() === 'post') {
+            $formData = $this->request->getPost();
+            $validation = \Config\Services::validation();
+            $validation->setRules([
+                'data_admin' => 'required',
+                'keterangan_data_admin' => 'required'
+            ]);
+
+            if ($validation->withRequest($this->request)->run()) {
+                if ($id !== null) {
+                    $dataadmin->update($id, $formData);
+                }
+                else {
+                    $dataadmin->insert($formData);
+                }
+                return redirect()->to('/data_admin_admin')->with('sukses', 'Data berhasil diubah.');
+            } else {
+                return view('admin/data-admin', [
+                    'data' => $formData,
+                    'validation' => $validation
+                ]);
+            }
+        }
+        return view('admin/data-admin', [
+            'data' => $data,
+            'dataa' => $dataa
+        ]);
+    }
+
+    //logout
+    public function logout() 
+    {
+        session()->destroy();
+        return redirect()->to(base_url('/'));
+    }
 
 
     

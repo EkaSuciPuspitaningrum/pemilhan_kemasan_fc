@@ -1,7 +1,7 @@
 <?= $this->extend('layouts-admin/app') ?>
 
 <?= $this->section('title') ?>
-  <title>Pemilhan Kemasan &mdash; Jenis Kemasan</title>
+  <title>Pemilihan Kemasan &mdash; Jenis Kemasan</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('link') ?>
@@ -18,13 +18,13 @@
             <h2 class="section-title">Jenis Kemasan</h2>
             <p class="section-lead">Silahkan tambahkan, ubah maupun hapus data jenis-jenis kemasan.</p>
             <?php if(session()->getFlashdata('sukses')):?>
-                    <div class="alert alert-success alert-dismissible show fade">
-                      <div class="alert-body">
+                <div class="alert alert-success alert-dismissible show fade">
+                    <div class="alert-body">
                         <button class="close" data-dismiss="alert">
                           <span>&times;</span>
                         </button>
                         <?= session()->getFlashdata('sukses') ?>
-                      </div>
+                    </div>
                 </div>
             <?php endif;?>
             <?php if(session()->getFlashdata('gagal')):?>

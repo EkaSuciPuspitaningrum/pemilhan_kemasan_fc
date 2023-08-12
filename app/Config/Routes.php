@@ -45,10 +45,9 @@ $routes->post('/registrasi_pakar', 'Auth::registrasi');
 
 $routes->get('/dashboard_admin', 'Admin::dashboard_admin');
 
-$routes->get('/jenis_kemasan_admin', 'Admin::jenis_kemasan');
-$routes->post('/jenis_kemasan', 'Admin::jenis_kemasan_create');
-$routes->get('/jenis_kemasan/edit/(:num)', 'Admin::jenis_kemasan_edit/$1');
-$routes->post('/jenis_kemasan/update/(:num)', 'Admin::jenis_kemasan_update/$1');
+$routes->get('/jenis_kemasan_admin', 'Admin::jenis_kemasan_admin');
+$routes->post('/jenis_kemasan_create', 'Admin::jenis_kemasan_create');
+$routes->add('add_edit_data/(:num)?', 'Admin::add_edit_data/$1');
 $routes->get('/jenis_kemasan/hapus/(:num)', 'Admin::jenis_kemasan_delete/$1');
 
 $routes->get('/kriteria_produk', 'Admin::kriteria_produk');

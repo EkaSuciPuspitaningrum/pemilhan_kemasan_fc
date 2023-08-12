@@ -41,43 +41,37 @@
             <div class="row">
                 <div class="col-6">
                     <div class="card">
-                        <div class="card-header">
-                            <h4>Tambah Data</h4>
-                        </div>
-                        <div class="card-body">
-                            <form action="<?php echo base_url('kriteria_produk');?>" method="POST">
-                                    <div class="form-group">
-                                        <label for="kriteriaProduk">Kriteria Produk</label>
-                                        <input type="text"
-                                            class="form-control"
-                                            id="kriteria_produk" name="kriteria_produk">
-                                    </div>
-                                    <div style="text-align-last: center;">
-                                        <button type="submit"
-                                            class="btn btn-primary">Tambah</button>
-                                     </div>
-                            </form>
+                    <div class="card-header">
+                        <h4>Tambah Data</h4>
+                    </div>
+                        <div class="card-body">   
+                        <form action="<?= base_url('kriteria_produk'); ?>" method="POST">
+                            <div class="form-group">
+                                <label for="kriteria_produk">Jenis Kemasan</label>
+                                <input type="text" class="form-control" id="kriteria_produk" name="kriteria_produk">
+                            </div>
+                            <div style="text-align-last: center;">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
                         </div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="card">
-                        <div class="card-header">
-                            <h4>Edit Data</h4>
-                        </div>
-                        <div class="card-body">
-                            <form action="<?php echo base_url('kriteria_produk');?>" method="POST">
-                                    <div class="form-group">
-                                        <label for="kriteriaProduk">Kriteria Produk</label>
-                                        <input type="text"
-                                            class="form-control"
-                                            id="kriteria_produk" name="kriteria_produk">
-                                    </div>
-                                    <div style="text-align-last: center;">
-                                        <button type="submit"
-                                            class="btn btn-warning">Edit</button>
-                                     </div>
-                            </form>
+                    <div class="card-header">
+                        <h4>Ubah Data</h4>
+                    </div>
+                        <div class="card-body">   
+                        <form action="<?= base_url('edit_kriteria/' . ($data->id ?? '')); ?>" method="POST">
+                            <div class="form-group">
+                                <label for="kriteria_produk">Jenis Kemasan</label>
+                                <input type="text" class="form-control" id="kriteria_produk" name="kriteria_produk" value="<?php echo $data->kriteria_produk ?? ''; ?>">
+                            </div>
+                            <div style="text-align-last: center;">
+                                <button type="submit" class="btn btn-warning">Edit</button>
+                            </div>
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -113,8 +107,8 @@
                                                 <td><?php echo $r->kriteria_produk ?></td>
                                                 <td style="text-align: center"><?php echo $r->created_date ?></td>
                                                 <td style="text-align: center">
-                                                <button class="btn btn-warning" href="<?php echo base_url('kriteria_produk/edit/'.$r->id);?>">EDIT</button>
-                                                    <button class="btn btn-danger" href="<?php echo base_url('kriteria_produk/hapus/'.$r->id);?>">HAPUS</button>
+                                                    <a class="btn btn-warning" href="<?= base_url('edit_kriteria/' . $r->id); ?>">Edit</a>
+                                                    <a class="btn btn-danger" href="<?= base_url('kriteria/hapus/' . $r->id); ?>">HAPUS</a>
                                                 </td>
                                                 </tr>
                                             <?php endforeach ?>

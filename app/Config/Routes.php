@@ -55,6 +55,9 @@ $routes->post('/kriteria_produk', 'Admin::kriteria_produk_create');
 $routes->get('/kriteria_produk/edit', 'Admin::kriteria_produk_edit');
 $routes->post('/kriteria_produk/hapus(:num)', 'Admin::kriteria_produk_delete/$1');
 
+$routes->add('edit_kriteria/(:num)?', 'Admin::edit_kriteria/$1');
+$routes->get('/kriteria/hapus/(:num)', 'Admin::kriteria_delete/$1');
+
 $routes->get('/basis_pengetahuan', 'Admin::basis_pengetahuan');
 $routes->post('/basis_pengetahuan', 'Admin::basis_pengetahuan_create');
 

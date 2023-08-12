@@ -111,25 +111,6 @@ class Admin extends BaseController
 }
 
 
-    public function jenis_kemasan_update($id)
-    {
-        $kemasan = new JenisKemasan();
-
-        $data = [
-            'jenis_kemasan' => $this->request->getPost('jenis_kemasan'),
-            'keterangan_kemasan' => $this->request->getPost('keterangan_kemasan')
-            // ... other fields
-        ];
-
-        // Validate data
-        if ($kemasan->validate($data)) {
-            $kemasan->update($id, $data);
-            return redirect()->to('admin/jenis_kemasan')->with('success', 'Product updated successfully');
-        } else {
-            return redirect()->back()->withInput()->with('errors', $kemasan->errors());
-        }
-    }
-
 
     public function kriteria_produk()
     {
@@ -163,24 +144,55 @@ class Admin extends BaseController
         }
     }
 
+    public function edit_kriteria($id = null)
+{
+    $kriteriaa = new KriteriaProduk();
+    $kriteria = $kriteriaa->findAll();
 
-    public function basis_pengetahuan()
-    {
-        $jeniskemasan = new JenisKemasan();
-        $kemasan = $jeniskemasan->findAll();
-       
-        $kriteriaproduk = new KriteriaProduk();
-        $kriteria = $kriteriaproduk->findAll();
-        
-        $pengetahuan = new BasisPengetahuan();
-        $data = $pengetahuan->findAll();
-        return view('admin/basis_pengetahuan', [
-            'data' => $data,
-            'kemasan' => $kemasan,
-            'kriteria' => $kriteria,
-            
-        ]);
+
+    $data = [];
+
+    if ($id !== null) {
+        $kriteriaa = new KriteriaProduk();
+        $data = $kriteriaa->find($id);
     }
+    if ($this->request->getMethod() === 'post') {
+        $formData = $this->request->getPost();
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'kriteria_produk'       => 'required',
+        ]);
+
+        if ($validation->withRequest($this->request)->run()) {
+            if ($id !== null) {
+                $kriteriaa->update($id, $formData);
+            }
+            else {
+                $kriteriaa->insert($formData);
+            }
+            return redirect()->to('/kriteria_produk')->with('sukses', 'Data berhasil diubah.');
+        } else {
+            return view('admin/kriteria_produk', [
+                'data' => $formData,
+                'validation' => $validation
+            ]);
+        }
+    }
+    return view('admin/kriteria_produk', [
+        'data' => $data,
+        'kriteria' => $kriteria
+    ]);
+}
+
+public function kriteria_delete($id)
+{
+    $kriteriaa = new KriteriaProduk();
+    $kriteriaa->delete($id);
+    
+    return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
+
+}
+
 
     public function akun()
     {

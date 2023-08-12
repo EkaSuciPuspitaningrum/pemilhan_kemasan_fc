@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#table').DataTable({
+    $('#table2').DataTable({
         scrollX: true,
         autoWidth: false,
         paging: true,

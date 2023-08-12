@@ -23,7 +23,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div>
-                                    <h4>Data Admin</h4>
+                                    <h4>Data Calon Pakar</h4>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -32,9 +32,13 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama Admin</th>
+                                                <th>Nama Pertama</th>
+                                                <th>Nama Terakhir</th>
                                                 <th>Email</th>
                                                 <th>Password</th>
+                                                <th>Pendidikan Terakhir</th>
+                                                <th>Instansi</th>
+                                                <th>Dokumen (CV)</th>
                                                 <th>Created At</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -42,15 +46,19 @@
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            foreach ($dataa as $row) : ?>
+                                            foreach ($data_calon as $row) : ?>
                                                 <tr>
                                                     <td style="text-align: center"><?= $no++ ?></td>
-                                                    <td><?= $row->name ?></td>
+                                                    <td><?= $row->first_name ?></td>
+                                                    <td><?= $row->last_name ?></td>
                                                     <td><?= $row->email ?></td>
                                                     <td><?= $row->password ?></td>
+                                                    <td><?= $row->pendidikan ?></td>
+                                                    <td><?= $row->instansi ?></td>
+                                                    <td><?= $row->dokumen ?></td>
                                                     <td style="text-align: center"><?= $row->created_date ?></td>
                                                     <td style="text-align: center">
-                                                        <a class="btn btn-warning" href="<?= base_url('add_edit_data/' . $row->id); ?>">Edit</a>
+                                                        <a class="btn btn-warning" href="<?= base_url('add_edit_data/' . $row->id); ?>">LIHAT DATA</a>
                                                         <a class="btn btn-danger" href="<?= base_url('data-admin/hapus/' . $row->id); ?>">HAPUS</a>
                                                     </td>
                                                 </tr>
@@ -108,6 +116,29 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Ubah Data</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="<?= base_url('data-admin_create'); ?>" method="POST">
+                                <div class="form-group">
+                                    <label for="jenis_kemasan">Jenis Kemasan</label>
+                                    <input type="text" class="form-control" id="jenis_kemasan" name="jenis_kemasan">
+                                    <code>* Isi dengan data admin</code>
+                                </div>
+                                <div class="form-group">
+                                    <label for="keterangan_kemasan">Keterangan Kemasan</label>
+                                    <textarea class="form-control" style="height: 150px" name="keterangan_kemasan" required></textarea>
+                                </div>
+                                <div style="text-align-last: center;">
+                                    <button type="submit" class="btn btn-warning">Edit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
                 <div class="row">
                     <div class="col-12">
@@ -120,13 +151,17 @@
                             </div>
                             <div class="card-body">
                                 <div>
-                                    <table id="table" class="table">
+                                    <table id="table2" class="table">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama Admin</th>
+                                                <th>Nama Pertama</th>
+                                                <th>Nama Terakhir</th>
                                                 <th>Email</th>
                                                 <th>Password</th>
+                                                <th>Pendidikan Terakhir</th>
+                                                <th>Instansi</th>
+                                                <th>Dokumen (CV)</th>
                                                 <th>Created At</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -134,15 +169,19 @@
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            foreach ($dataa as $row) : ?>
+                                            foreach ($data_pakar as $row) : ?>
                                                 <tr>
                                                     <td style="text-align: center"><?= $no++ ?></td>
-                                                    <td><?= $row->name ?></td>
+                                                    <td><?= $row->first_name ?></td>
+                                                    <td><?= $row->last_name ?></td>
                                                     <td><?= $row->email ?></td>
                                                     <td><?= $row->password ?></td>
+                                                    <td><?= $row->pendidikan ?></td>
+                                                    <td><?= $row->instansi ?></td>
+                                                    <td><?= $row->dokumen ?></td>
                                                     <td style="text-align: center"><?= $row->created_date ?></td>
                                                     <td style="text-align: center">
-                                                        <a class="btn btn-warning" href="<?= base_url('add_edit_data/' . $row->id); ?>">Edit</a>
+                                                        <a class="btn btn-warning" href="<?= base_url('add_edit_data/' . $row->id); ?>">LIHAT DATA</a>
                                                         <a class="btn btn-danger" href="<?= base_url('data-admin/hapus/' . $row->id); ?>">HAPUS</a>
                                                     </td>
                                                 </tr>
@@ -175,6 +214,7 @@
   <script src="<?=base_url()?>/assets/js/stisla.js"></script>
   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
   <script src="<?=base_url()?>/assets/js/tabel.js"></script>
+  <script src="<?=base_url()?>/assets/js/tabel2.js"></script>
   <script src="../assets/js/page/bootstrap-modal.js"></script>
 
   <!-- JS Libraies -->

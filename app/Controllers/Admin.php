@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Admin as ModelsAdmin;
 use App\Models\BasisPengetahuan;
+use App\Models\CalonPakar;
 use App\Models\JenisKemasan;
 use App\Models\KriteriaProduk;
 use App\Models\Pakar;
@@ -13,7 +14,7 @@ class Admin extends BaseController
     protected $jeniskemasan;
     protected $kriteriaproduk;
     protected $pengetahuan;
-    protected $datapakar;
+    protected $dataadmin;
 
  
     function __construct()
@@ -21,7 +22,7 @@ class Admin extends BaseController
         $this->jeniskemasan = new JenisKemasan();
         $this->kriteriaproduk = new KriteriaProduk();
         $this->pengetahuan = new BasisPengetahuan();
-        $this->datapakar = new ModelsAdmin();
+        $this->dataadmin = new ModelsAdmin();
 
     }
     
@@ -207,8 +208,8 @@ class Admin extends BaseController
     //data admin
     public function data_admin()
     {
-        $datapakar = new ModelsAdmin();
-        $dataa = $datapakar->findAll();
+        $dataadmin = new ModelsAdmin();
+        $dataa = $dataadmin->findAll();
 
         return view('admin/data-admin', [
             'dataa' => $dataa
@@ -219,32 +220,45 @@ class Admin extends BaseController
     public function data_admin_create()
     {
         $session = session();
-
+    
+        // Validate form input
         $rules = [
-            'data_admin'          => 'required',
-            'keterangan_data-admin'       => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required'
         ];
-        
-          
-        if($this->validate($rules)){
-            $this->jeniskemasan->insert([
-                'data_admin'     => $this->request->getPost('data_admin'),
-                'keterangan_data_admin'    => $this->request->getPost('keterangan_data_admin')
-            ]);
-            
+    
+        if ($this->validate($rules)) {
+            $formData = $this->request->getPost();
+    
+            // Hash the password
+            $hashedPassword = password_hash($formData['password'], PASSWORD_DEFAULT);
+    
+            // Prepare data for insertion
+            $data = [
+                'name' => $formData['name'],
+                'email' => $formData['email'],
+                'password' => $formData['password'],
+                'password_hash' => $hashedPassword
+            ];
+    
+            // Insert data into the database
+            $this->dataadmin->insert($data);
+    
             $session->setFlashdata('sukses', 'Data berhasil ditambah.');
-            return redirect()->to('/data-admin_admin');
-        }else{
+            return redirect()->to('/data_admin');
+        } else {
             $session->setFlashdata('gagal', 'Data gagal ditambah.');
-            return redirect()->to('/data-admin_admin');
+            return redirect()->to('/data_admin');
         }
     }
+    
 
     //hapus data admin
     public function data_admin_delete($id)
     {
-        $datapakar = new ModelsAdmin();
-        $datapakar->delete($id);
+        $dataadmin = new ModelsAdmin();
+        $dataadmin->delete($id);
         
         return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
 
@@ -253,8 +267,8 @@ class Admin extends BaseController
     //edit data admin
     public function add_edit_data_admin($id = null)
     {
-        $datapakar = new ModelsAdmin();
-        $dataa = $datapakar->findAll();
+        $dataadmin = new ModelsAdmin();
+        $dataa = $dataadmin->findAll();
 
         $data = [];
 
@@ -266,18 +280,20 @@ class Admin extends BaseController
             $formData = $this->request->getPost();
             $validation = \Config\Services::validation();
             $validation->setRules([
-                'data_admin' => 'required',
-                'keterangan_data_admin' => 'required'
+                'name' => 'required',
+                'email' => 'required',
+                'password' => 'required'
+
             ]);
 
             if ($validation->withRequest($this->request)->run()) {
                 if ($id !== null) {
-                    $datapakar->update($id, $formData);
+                    $dataadmin->update($id, $formData);
                 }
                 else {
-                    $datapakar->insert($formData);
+                    $dataadmin->insert($formData);
                 }
-                return redirect()->to('/data_admin_admin')->with('sukses', 'Data berhasil diubah.');
+                return redirect()->to('/data_admin')->with('sukses', 'Data berhasil diubah.');
             } else {
                 return view('admin/data-admin', [
                     'data' => $formData,
@@ -293,11 +309,14 @@ class Admin extends BaseController
 
     public function data_pakar()
     {
-        $datapakar = new Pakar();
-        $dataa = $datapakar->findAll();
+        $dataadmin = new Pakar();
+        $data_pakar = $dataadmin->findAll();
+        $datacalonpakar = new CalonPakar();
+        $data_calon = $datacalonpakar->findAll();
 
         return view('admin/data-pakar', [
-            'dataa' => $dataa
+            'data_pakar' => $data_pakar,
+            'data_calon' => $data_calon
         ]);
     }
 

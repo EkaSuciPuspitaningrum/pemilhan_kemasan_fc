@@ -44,18 +44,45 @@
                             <h4>Tambah Data</h4>
                         </div>
                         <div class="card-body">
-                            <form action="<?= base_url('data-admin_create'); ?>" method="POST">
+                            <form action="<?= base_url('data_admin_create'); ?>" method="POST">
                                 <div class="form-group">
-                                    <label for="data_admin">Data Admin</label>
-                                    <input type="text" class="form-control" id="jenis_kemasan" name="jenis_kemasan">
-                                    <code>* Isi dengan data admin</code>
+                                    <label for="name">Nama</label>
+                                    <input type="text" class="form-control" id="name" name="name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="data_admin">Data Admin</label>
-                                    <textarea class="form-control" style="height: 150px" name="keterangan_kemasan" required></textarea>
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email">
+                                </div><div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="text" class="form-control" id="password" name="password">
                                 </div>
                                 <div style="text-align-last: center;">
                                     <button type="submit" class="btn btn-primary">Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Ubah Data</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="<?= base_url('add_edit_data_admin/' . ($data->id ?? '')); ?>" method="POST">
+                                <div class="form-group">
+                                    <label for="name">Nama</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="<?php echo $data->name ?? ''; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $data->email ?? ''; ?>">
+                                </div><div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="text" class="form-control" id="password" name="password" value="<?php echo $data->password ?? ''; ?>">
+                                </div>
+                                <div style="text-align-last: center;">
+                                    <button type="submit" class="btn btn-warning">Edit</button>
                                 </div>
                             </form>
                         </div>
@@ -95,8 +122,8 @@
                                                     <td><?= $row->password ?></td>
                                                     <td style="text-align: center"><?= $row->created_date ?></td>
                                                     <td style="text-align: center">
-                                                        <a class="btn btn-warning" href="<?= base_url('add_edit_data/' . $row->id); ?>">Edit</a>
-                                                        <a class="btn btn-danger" href="<?= base_url('data-admin/hapus/' . $row->id); ?>">HAPUS</a>
+                                                        <a class="btn btn-warning" href="<?= base_url('add_edit_data_admin/' . $row->id); ?>">Edit</a>
+                                                        <a class="btn btn-danger" href="<?= base_url('data_admin/hapus/' . $row->id); ?>">HAPUS</a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>

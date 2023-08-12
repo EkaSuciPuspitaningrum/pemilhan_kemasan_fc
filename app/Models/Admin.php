@@ -10,6 +10,7 @@ class Admin extends Model
             'name',
             'email',
             'password',
+            'password_hash',
             'created_date', 'updated_date'];
 
 

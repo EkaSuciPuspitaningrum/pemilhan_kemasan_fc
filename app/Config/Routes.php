@@ -42,21 +42,13 @@ $routes->post('/registrasi_pakar', 'Auth::registrasi');
 
 
 
-
 $routes->get('/dashboard_admin', 'Admin::dashboard_admin');
 
 $routes->get('/jenis_kemasan_admin', 'Admin::jenis_kemasan_admin');
 
-//crud di 3 ini, terapin juga di pakar, ini samain aja dan namanya tinggal ganti Admin ke Pakar
-// crud jenis kemasan admin
 $routes->post('/jenis_kemasan_create', 'Admin::jenis_kemasan_create');
 $routes->add('add_edit_data/(:num)?', 'Admin::add_edit_data/$1');
 $routes->get('/jenis_kemasan/hapus/(:num)', 'Admin::jenis_kemasan_delete/$1');
-
-//crud jenis kemasan pakar
-$routes->post('/jenis_kemasan_create', 'Pakar::jenis_kemasan_create');
-$routes->add('add_edit_data/(:num)?', 'Pakar::add_edit_data/$1');
-$routes->get('/jenis_kemasan/hapus/(:num)', 'Pakar::jenis_kemasan_delete/$1');
 
 $routes->get('/kriteria_produk', 'Admin::kriteria_produk');
 $routes->post('/kriteria_produk', 'Admin::kriteria_produk_create');
@@ -70,17 +62,14 @@ $routes->get('/basis_pengetahuan', 'Admin::basis_pengetahuan');
 $routes->post('/basis_pengetahuan', 'Admin::basis_pengetahuan_create');
 
 $routes->get('/akun', 'Admin::akun');
+$routes->get('/logout_admin', 'Admin::logout');
 
+$routes->get('/dashboard_pakar', 'Pakar::dashboard_pakar');
+$routes->get('/jenis_kemasan_pakar', 'Pakar::jenis_kemasan');
+$routes->post('/jenis_kemasan_create', 'Pakar::jenis_kemasan_create');
+$routes->add('add_edit_data/(:num)?', 'Pakar::add_edit_data/$1');
+$routes->get('/jenis_kemasan/hapus/(:num)', 'Pakar::jenis_kemasan_delete/$1');
 
-// $routes->get('/dashboard_pakar', 'Pakar::dashboard_pakar');
-
-// $routes->get('/akun_pakar', 'Pakar::akun');
-
-// $routes->get('/jenis_kemasan_pakar', 'Pakar::jenis_kemasan');
-// $routes->post('/jenis_kemasan_pakar', 'Pakar::jenis_kemasan_create');
-// $routes->get('/jenis_kemasan_pakar/edit/(:segment)', 'Pakar::jenis_kemasan_edit/$1');
-// $routes->post('/jenis_kemasan_pakar/update/(:segment)', 'Pakar::jenis_kemasan_update/$1');
-// $routes->get('/jenis_kemasan_pakar/hapus/(:segment)', 'Pakar::jenis_kemasan_delete/$1');
 
 // $routes->get('/kriteria_produk_pakar', 'Pakar::kriteria_produk');
 // $routes->post('/kriteria_produk_pakar', 'Pakar::kriteria_produk_create');

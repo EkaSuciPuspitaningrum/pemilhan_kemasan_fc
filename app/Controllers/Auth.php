@@ -21,13 +21,13 @@ class Auth extends BaseController
             $password = $this->request->getVar('password');
             $data = $model->where('email', $email)->first();
             if($data){
-                $pass = $data['password_hash'];
+                $pass = $data->password_hash;
                 $verify_pass = password_verify($password, $pass);
                 if($verify_pass){
                     $ses_data = [
-                        'id'       => $data['id'],
-                        'name'     => $data['name'],
-                        'email'    => $data['email'],
+                        'id'       => $data->id,
+                        'name'     => $data->name,
+                        'email'    => $data->email,
                         'logged_in'     => TRUE
                     ];
                     $session->set($ses_data);
@@ -43,11 +43,6 @@ class Auth extends BaseController
         }
         // dd($email, $password);
    
-   public function logout() 
-   {
-      session()->destroy();
-      return redirect()->to(base_url('/'));
-   }
 
    public function registrasi_pakar()
    {

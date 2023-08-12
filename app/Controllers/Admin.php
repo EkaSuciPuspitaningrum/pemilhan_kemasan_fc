@@ -20,6 +20,7 @@ class Admin extends BaseController
         $this->pengetahuan = new BasisPengetahuan();
 
     }
+    
 
     public function dashboard_admin()
     {
@@ -197,8 +198,12 @@ public function kriteria_delete($id)
 }
 
 
-    public function akun()
-    {
-        return view('admin/akun');
-    }
+public function logout() 
+{
+   session()->destroy();
+   return redirect()->to(base_url('/'));
+}
+
+
+    
 }

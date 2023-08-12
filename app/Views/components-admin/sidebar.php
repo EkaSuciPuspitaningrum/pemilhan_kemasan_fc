@@ -38,7 +38,7 @@
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="<?php echo base_url('/akun');?>">Data Admin</a></li>
                 <li><a class="nav-link" href="<?php echo base_url('/akun');?>">Data Pakar</a></li>
-                <li><a class="nav-link" href="index.html">Logout</a></li>
+                <li><a class="nav-link" href="<?= base_url('/logout_admin'); ?>">Logout</a></li>
               </ul>
             </li>
 

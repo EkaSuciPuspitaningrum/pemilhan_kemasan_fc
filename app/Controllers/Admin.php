@@ -63,18 +63,8 @@ class Admin extends BaseController
 
     public function jenis_kemasan_delete($id)
     {
-        $this->jeniskemasan->id = $_GET['id_jeniskemasan'];
-        $this->jeniskemasan->delete();
-        $this->session->set_flashdata('hapus', 
-        '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-         <strong>Data Gejala Berhasil Dhapus !</strong>
-         <button class="close" type="button" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">×</span>
-        </button></div>');
-        redirect('admin/jenis_kemasan');
-
-        // $kemasan = new JenisKemasan();
-        // $kemasan->delete($id);
+        $kemasan = new JenisKemasan();
+        $kemasan->delete($id);
         
         return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
 

@@ -16,7 +16,7 @@ class Perhitungan extends BaseController
         $rules = $kriteriaRuleModel->where('id', $selectKriteria)->findAll();
 
         // Apply each rule to auto-enroll based on the selected criterion
-        $riwayatModel = new ();
+        $riwayatModel = new BasisPengetahuan();
         foreach ($rules as $rule) {
             // Validate rule or perform additional checks as needed
 

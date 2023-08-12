@@ -115,7 +115,7 @@ class Admin extends BaseController
     }
 
 
-
+    //data kriteria
     public function kriteria_produk()
     {
         
@@ -126,6 +126,7 @@ class Admin extends BaseController
         ]);
     }
 
+    //simpan data kriteria
     public function kriteria_produk_create()
     {
         $session = session();
@@ -148,54 +149,56 @@ class Admin extends BaseController
         }
     }
 
+    //edit kriteria
     public function edit_kriteria($id = null)
-{
-    $kriteriaa = new KriteriaProduk();
-    $kriteria = $kriteriaa->findAll();
-
-
-    $data = [];
-
-    if ($id !== null) {
+    {
         $kriteriaa = new KriteriaProduk();
-        $data = $kriteriaa->find($id);
-    }
-    if ($this->request->getMethod() === 'post') {
-        $formData = $this->request->getPost();
-        $validation = \Config\Services::validation();
-        $validation->setRules([
-            'kriteria_produk'       => 'required',
-        ]);
+        $kriteria = $kriteriaa->findAll();
 
-        if ($validation->withRequest($this->request)->run()) {
-            if ($id !== null) {
-                $kriteriaa->update($id, $formData);
-            }
-            else {
-                $kriteriaa->insert($formData);
-            }
-            return redirect()->to('/kriteria_produk')->with('sukses', 'Data berhasil diubah.');
-        } else {
-            return view('admin/kriteria_produk', [
-                'data' => $formData,
-                'validation' => $validation
-            ]);
+
+        $data = [];
+
+        if ($id !== null) {
+            $kriteriaa = new KriteriaProduk();
+            $data = $kriteriaa->find($id);
         }
+        if ($this->request->getMethod() === 'post') {
+            $formData = $this->request->getPost();
+            $validation = \Config\Services::validation();
+            $validation->setRules([
+                'kriteria_produk'       => 'required',
+            ]);
+
+            if ($validation->withRequest($this->request)->run()) {
+                if ($id !== null) {
+                    $kriteriaa->update($id, $formData);
+                }
+                else {
+                    $kriteriaa->insert($formData);
+                }
+                return redirect()->to('/kriteria_produk')->with('sukses', 'Data berhasil diubah.');
+            } else {
+                return view('admin/kriteria_produk', [
+                    'data' => $formData,
+                    'validation' => $validation
+                ]);
+            }
+        }
+        return view('admin/kriteria_produk', [
+            'data' => $data,
+            'kriteria' => $kriteria
+        ]);
     }
-    return view('admin/kriteria_produk', [
-        'data' => $data,
-        'kriteria' => $kriteria
-    ]);
-}
 
-public function kriteria_delete($id)
-{
-    $kriteriaa = new KriteriaProduk();
-    $kriteriaa->delete($id);
-    
-    return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
+    //hapus data kriteria
+    public function kriteria_delete($id)
+    {
+        $kriteriaa = new KriteriaProduk();
+        $kriteriaa->delete($id);
+        
+        return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
 
-}
+    }
 
 
 public function logout() 

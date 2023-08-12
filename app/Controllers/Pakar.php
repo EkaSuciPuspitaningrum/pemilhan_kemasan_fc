@@ -38,7 +38,7 @@ class Pakar extends BaseController
         ]);
     }
 
-    //simpan data
+    //simpan data jenis kemasan
     public function jenis_kemasan_create()
     {
         $session = session();
@@ -63,7 +63,7 @@ class Pakar extends BaseController
         }
     }
 
-    //hapus data
+    //hapus data jenis kemasan
     public function jenis_kemasan_delete($id)
     {
         $kemasan = new JenisKemasan();
@@ -72,7 +72,7 @@ class Pakar extends BaseController
         return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
     }
 
-    //edit data
+    //edit data jenis kemasan
     public function add_edit_data($id = null)
     {
         
@@ -114,6 +114,7 @@ class Pakar extends BaseController
         ]);
     }
 
+    //data kriteria kemasan
     public function kriteria_produk()
     {
         
@@ -124,6 +125,7 @@ class Pakar extends BaseController
         ]);
     }
 
+    //simpan data kriteria
     public function kriteria_produk_create()
     {
         $session = session();
@@ -139,31 +141,81 @@ class Pakar extends BaseController
             ]);
             
             $session->setFlashdata('sukses', 'Data berhasil ditambah.');
-            return redirect()->to('/kriteria_produk_pakar');
+            return redirect()->to('/kriteria_produk');
         }else{
             $session->setFlashdata('gagal', 'Data gagal ditambah.');
-            return redirect()->to('/kriteria_produk_pakar');
+            return redirect()->to('/kriteria_produk');
         }
     }
 
-
-    public function basis_pengetahuan()
+    //edit kriteria
+    public function edit_kriteria($id = null)
     {
-        $jeniskemasan = new JenisKemasan();
-        $kemasan = $jeniskemasan->findAll();
-       
-        $kriteriaproduk = new KriteriaProduk();
-        $kriteria = $kriteriaproduk->findAll();
-        
-        $pengetahuan = new BasisPengetahuan();
-        $data = $pengetahuan->findAll();
-        return view('pakar/basis_pengetahuan', [
+        $kriteriaa = new KriteriaProduk();
+        $kriteria = $kriteriaa->findAll();
+
+
+        $data = [];
+
+        if ($id !== null) {
+            $kriteriaa = new KriteriaProduk();
+            $data = $kriteriaa->find($id);
+        }
+        if ($this->request->getMethod() === 'post') {
+            $formData = $this->request->getPost();
+            $validation = \Config\Services::validation();
+            $validation->setRules([
+                'kriteria_produk'       => 'required',
+            ]);
+
+            if ($validation->withRequest($this->request)->run()) {
+                if ($id !== null) {
+                    $kriteriaa->update($id, $formData);
+                }
+                else {
+                    $kriteriaa->insert($formData);
+                }
+                return redirect()->to('/kriteria_produk')->with('sukses', 'Data berhasil diubah.');
+            } else {
+                return view('pakar/kriteria_produk', [
+                    'data' => $formData,
+                    'validation' => $validation
+                ]);
+            }
+        }
+        return view('pakar/kriteria_produk', [
             'data' => $data,
-            'kemasan' => $kemasan,
-            'kriteria' => $kriteria,
-            
+            'kriteria' => $kriteria
         ]);
     }
+
+    //hapus data kriteria
+    public function kriteria_delete($id)
+    {
+        $kriteriaa = new KriteriaProduk();
+        $kriteriaa->delete($id);
+        
+        return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
+
+    }
+
+    // public function basis_pengetahuan()
+    // {
+    //     $jeniskemasan = new JenisKemasan();
+    //     $kemasan = $jeniskemasan->findAll();
+       
+    //     $kriteriaproduk = new KriteriaProduk();
+    //     $kriteria = $kriteriaproduk->findAll();
+        
+    //     $pengetahuan = new BasisPengetahuan();
+    //     $data = $pengetahuan->findAll();
+    //     return view('pakar/basis_pengetahuan', [
+    //         'data' => $data,
+    //         'kemasan' => $kemasan,
+    //         'kriteria' => $kriteria,
+            
+    //     ]);
+    // }
 
     public function akun()
     {

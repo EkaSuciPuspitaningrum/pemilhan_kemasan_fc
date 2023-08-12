@@ -60,10 +60,27 @@
                                                 <th class="text-white text-center">Kriteria Produk</th>
                                                 <th class="text-white text-center">Pilih Kriteria Produk</th>
 
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white">
+                                            <!-- @foreach ($kriteria as $kriteria)
+                                            <tr>
+                                                <th class="text-center"></th>
+                                                <th class=""></th>
+                                                <th class="text-center">
+                                                    <div class="form-group">
+                                                        <select name="kondisi[]" id="kondisi" class="form-control">
+                                                            <option value="" class="">Sangat Yakin</option>
+                                                            <option value="" class="">Yakin</option>
+                                                            <option value="" class="">MUngkin</option>
+                                                            <option value="" class="">Ragu-Ragu</option>
+                                                            <option value="" class="">Tidak Yakin</option>
+                                                        </select>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                            @endforeach -->
                                             
                                                 <?php 
                                             $no = 1;

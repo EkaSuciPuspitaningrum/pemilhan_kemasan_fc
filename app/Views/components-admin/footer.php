@@ -4,6 +4,6 @@
         <div class="bullet"></div> Sistem Pakar Kemasan Produk
     </div>
     <div class="footer-right">
-        Dempster Shafer
+        Forward Chaining
     </div> 
 </footer>

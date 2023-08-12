@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/app') ?>
 
 <?= $this->section('title') ?>
-  <title>Ecommerce Dashboard &mdash; Dempster Shafer</title>
+  <title>Ecommerce Dashboard &mdash; Forward chaining</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

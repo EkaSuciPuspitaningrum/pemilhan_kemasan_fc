@@ -136,7 +136,7 @@
                                                 
 
                                                     <button class="btn btn-warning" href="<?php echo base_url('jenis_kemasan/edit'.$r->id);?>">EDIT</button>
-                                                    <button class="btn btn-danger" href="<?php echo base_url('jenis_kemasan/delete'.$r->id);?>">HAPUS</button>
+                                                    <button class="btn btn-danger" href="<?php echo base_url('jenis_kemasan/jenis_kemasan_delete'.$r->id);?>">HAPUS</button>
                                                 </td>
                                                 </tr>
                                             <?php endforeach ?>

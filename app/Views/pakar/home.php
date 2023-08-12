@@ -1,7 +1,7 @@
 <?= $this->extend('layouts-pakar/app') ?>
 
 <?= $this->section('title') ?>
-  <title>DS &mdash; Dempster Shafer</title>
+  <title>FC &mdash; Forward Chaining</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

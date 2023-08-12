@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\DataPakar;
 use App\Models\BasisPengetahuan;
 use App\Models\JenisKemasan;
 use App\Models\KriteriaProduk;
@@ -12,6 +13,7 @@ class Pakar extends BaseController
     protected $jeniskemasan;
     protected $kriteriaproduk;
     protected $pengetahuan;
+    protected $datapakar;
 
  
     function __construct()
@@ -19,6 +21,7 @@ class Pakar extends BaseController
         $this->jeniskemasan = new JenisKemasan();
         $this->kriteriaproduk = new KriteriaProduk();
         $this->pengetahuan = new BasisPengetahuan();
+        $this->datapakar = new DataPakar();
 
     }
 
@@ -199,23 +202,24 @@ class Pakar extends BaseController
 
     }
 
-    // public function basis_pengetahuan()
-    // {
-    //     $jeniskemasan = new JenisKemasan();
-    //     $kemasan = $jeniskemasan->findAll();
+    //basis pengetahuan
+    public function basis_pengetahuan()
+    {
+        $jeniskemasan = new JenisKemasan();
+        $kemasan = $jeniskemasan->findAll();
        
-    //     $kriteriaproduk = new KriteriaProduk();
-    //     $kriteria = $kriteriaproduk->findAll();
+        $kriteriaproduk = new KriteriaProduk();
+        $kriteria = $kriteriaproduk->findAll();
         
-    //     $pengetahuan = new BasisPengetahuan();
-    //     $data = $pengetahuan->findAll();
-    //     return view('pakar/basis_pengetahuan', [
-    //         'data' => $data,
-    //         'kemasan' => $kemasan,
-    //         'kriteria' => $kriteria,
+        $pengetahuan = new BasisPengetahuan();
+        $data = $pengetahuan->findAll();
+        return view('pakar/basis_pengetahuan', [
+            'data' => $data,
+            'kemasan' => $kemasan,
+            'kriteria' => $kriteria,
             
-    //     ]);
-    // }
+        ]);
+    }
 
     public function akun()
     {

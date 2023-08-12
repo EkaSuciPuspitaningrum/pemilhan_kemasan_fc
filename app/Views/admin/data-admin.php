@@ -46,12 +46,12 @@
                         <div class="card-body">
                             <form action="<?= base_url('data-admin_create'); ?>" method="POST">
                                 <div class="form-group">
-                                    <label for="jenis_kemasan">Jenis Kemasan</label>
+                                    <label for="data_admin">Data Admin</label>
                                     <input type="text" class="form-control" id="jenis_kemasan" name="jenis_kemasan">
                                     <code>* Isi dengan data admin</code>
                                 </div>
                                 <div class="form-group">
-                                    <label for="keterangan_kemasan">Keterangan Kemasan</label>
+                                    <label for="data_admin">Data Admin</label>
                                     <textarea class="form-control" style="height: 150px" name="keterangan_kemasan" required></textarea>
                                 </div>
                                 <div style="text-align-last: center;">

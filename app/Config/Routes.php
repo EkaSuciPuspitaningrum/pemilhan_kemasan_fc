@@ -46,6 +46,13 @@ $routes->post('/data_admin_create', 'Admin::data_admin_create');
 $routes->add('add_edit_data_admin/(:num)?', 'Admin::add_edit_data_admin/$1');
 $routes->get('/data_admin/hapus/(:num)', 'Admin::data_admin_delete/$1');
 
+$routes->get('data_pakar', 'Admin::data_pakar');
+
+$routes->post('/data_pakar_create', 'Admin::data_pakar_create');
+$routes->add('add_edit_data_pakar/(:num)?', 'Admin::add_edit_data_pakar/$1');
+$routes->get('/data_pakar/hapus/(:num)', 'Admin::data_pakar_delete/$1');
+
+
 $routes->get('/dashboard_admin', 'Admin::dashboard_admin');
 
 $routes->get('/jenis_kemasan_admin', 'Admin::jenis_kemasan_admin');

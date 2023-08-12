@@ -36,7 +36,7 @@
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-gear"></i><span>Lainnya</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="<?php echo base_url('/akun');?>">Data Admin</a></li>
+                <li><a class="nav-link" href="<?php echo base_url('/data_admin');?>">Data Admin</a></li>
                 <li><a class="nav-link" href="<?php echo base_url('/akun');?>">Data Pakar</a></li>
                 <li><a class="nav-link" href="<?= base_url('/logout_admin'); ?>">Logout</a></li>
               </ul>

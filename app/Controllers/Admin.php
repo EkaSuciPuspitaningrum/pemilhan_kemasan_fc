@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Models\Admin as ModelsAdmin;
 use App\Models\BasisPengetahuan;
 use App\Models\JenisKemasan;
 use App\Models\KriteriaProduk;
-use App\Models\DataAdmin;
 
 class Admin extends BaseController
 {  
@@ -20,7 +20,7 @@ class Admin extends BaseController
         $this->jeniskemasan = new JenisKemasan();
         $this->kriteriaproduk = new KriteriaProduk();
         $this->pengetahuan = new BasisPengetahuan();
-        $this->dataadmin = new DataAdmin();
+        $this->dataadmin = new ModelsAdmin();
 
     }
     
@@ -204,13 +204,13 @@ class Admin extends BaseController
     }
 
     //data admin
-    public function data_admin($id)
+    public function data_admin()
     {
-        $dataadmin = new DataAdmin();
+        $dataadmin = new ModelsAdmin();
         $dataa = $dataadmin->findAll();
 
         return view('admin/data-admin', [
-            'dataa' => $data
+            'dataa' => $dataa
         ]);
     }
 
@@ -242,7 +242,7 @@ class Admin extends BaseController
     //hapus data admin
     public function data_admin_delete($id)
     {
-        $dataadmin = new DataAdmin();
+        $dataadmin = new ModelsAdmin();
         $dataadmin->delete($id);
         
         return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
@@ -252,13 +252,13 @@ class Admin extends BaseController
     //edit data admin
     public function add_edit_data_admin($id = null)
     {
-        $dataadmin = new DataAdmin();
+        $dataadmin = new ModelsAdmin();
         $dataa = $dataadmin->findAll();
 
         $data = [];
 
         if ($id !== null) {
-            $kemasan = new JenisKemasan();
+            $kemasan = new ModelsAdmin();
             $data = $kemasan->find($id);
         }
         if ($this->request->getMethod() === 'post') {

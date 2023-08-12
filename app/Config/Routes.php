@@ -40,7 +40,7 @@ $routes->post('/login_pakar', 'Auth::aksi_login_pakar');
 $routes->get('/registrasi_pakar', 'Auth::registrasi_pakar');
 $routes->post('/registrasi_pakar', 'Auth::registrasi');
 
-$routes->get('data-admin_admin', 'Admin::data-admin_admin');
+$routes->get('data_admin', 'Admin::data_admin');
 
 $routes->post('/data_admin_create', 'Admin::data_admin_create');
 $routes->add('add_edit_data_admin/(:num)?', 'Admin::add_edit_data_admin/$1');

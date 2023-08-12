@@ -61,6 +61,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
                 <div class="row">
                     <div class="col-12">
                         <br>
@@ -89,9 +90,9 @@
                                             foreach ($dataa as $row) : ?>
                                                 <tr>
                                                     <td style="text-align: center"><?= $no++ ?></td>
-                                                    <td style="text-align: center">K<?= $row->id ?></td>
-                                                    <td><?= $row->data_admin ?></td>
-                                                    <td><?= $row->data_admin ?></td>
+                                                    <td><?= $row->name ?></td>
+                                                    <td><?= $row->email ?></td>
+                                                    <td><?= $row->password ?></td>
                                                     <td style="text-align: center"><?= $row->created_date ?></td>
                                                     <td style="text-align: center">
                                                         <a class="btn btn-warning" href="<?= base_url('add_edit_data/' . $row->id); ?>">Edit</a>

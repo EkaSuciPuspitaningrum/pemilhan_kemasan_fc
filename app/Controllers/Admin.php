@@ -96,7 +96,7 @@ class Admin extends BaseController
             else {
                 $kemasan->insert($formData);
             }
-            return redirect()->to('/jenis_kemasan_admin');
+            return redirect()->to('/jenis_kemasan_admin')->with('sukses', 'Data berhasil dihapus.');
         } else {
             return view('admin/jenis_kemasan', [
                 'data' => $formData,

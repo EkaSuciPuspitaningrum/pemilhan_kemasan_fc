@@ -45,11 +45,10 @@ $routes->post('/registrasi_pakar', 'Auth::registrasi');
 
 $routes->get('/dashboard_admin', 'Admin::dashboard_admin');
 
-$routes->get('/jenis_kemasan_admin', 'Admin::jenis_kemasan');
-$routes->post('/jenis_kemasan_admin', 'Admin::jenis_kemasan_create');
-$routes->get('/jenis_kemasan_admin/edit/(:segment)', 'Admin::jenis_kemasan_edit/$1');
-$routes->post('/jenis_kemasan_admin/update/(:segment)', 'Admin::jenis_kemasan_update/$1');
-$routes->get('/jenis_kemasan_admin/hapus/(:segment)', 'Admin::jenis_kemasan_delete/$1');
+$routes->get('/jenis_kemasan_admin', 'Admin::jenis_kemasan_admin');
+$routes->post('/jenis_kemasan_create', 'Admin::jenis_kemasan_create');
+$routes->add('add_edit_data/(:num)?', 'Admin::add_edit_data/$1');
+$routes->get('/jenis_kemasan/hapus/(:num)', 'Admin::jenis_kemasan_delete/$1');
 
 $routes->get('/kriteria_produk', 'Admin::kriteria_produk');
 $routes->post('/kriteria_produk', 'Admin::kriteria_produk_create');
@@ -78,6 +77,7 @@ $routes->get('/akun', 'Admin::akun');
 // $routes->post('/kriteria_produk_pakar/hapus(:num)', 'Pakar::kriteria_produk_delete/$1');
 
 $routes->get('/pencarian_kemasan', 'User::pencarian_kemasan');
+$routes->post('/pencarian_kemasan', 'Perhitungan::pencarian');
 $routes->get('/riwayat_pencarian', 'User::riwayat_pencarian');
 
 

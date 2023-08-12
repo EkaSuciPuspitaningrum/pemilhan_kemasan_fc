@@ -29,30 +29,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- @foreach ($kriteria as $kriteriaa)
-                                            @foreach ($kepastian as $key => $kp)
-                                                @if ($kriteriaa->id == $key)
-                                                <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                
-                                                    <td>{{$kriteriaa->kriteria_produk}}</td>
-                                                    <td>
-                                                        @if($kp == 1)
-                                                        Pasti
-                                                        @elseif($kp == 2)
-                                                        Hampir pasti
-                                                        @elseif($kp == 3)
-                                                        Mungkin
-                                                        @elseif($kp == 4)
-                                                        Ragu-ragu
-                                                        @else
-                                                        Tidak
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                                @endif
-                                            @endforeach
-                                        @endforeach -->
+                                        
                                     </tbody>
                                 </table>
                             </div>

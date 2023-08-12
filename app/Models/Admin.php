@@ -5,6 +5,7 @@ class Admin extends Model
 {
 
       protected $table = 'admin';
+      protected $returnType     = 'object';
       protected $allowedFields = [
             'name',
             'email',

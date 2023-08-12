@@ -24,7 +24,7 @@
                             <h4>Masukkan Data Produk</h4>
                         </div>
                         <div class="card-body">
-                            <form action="" method="POST" enctype="multipart/form-data">
+                            <form action="<?= base_url('/pencarian_kemasan') ?>" method="POST" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="namaproduk">Nama Produk</label>
@@ -36,20 +36,20 @@
                                     <label for="beratproduk">Berat Produk</label>
                                     <input type="text"
                                            class="form-control"
-                                           id="beratproduk" required>
+                                           id="beratproduk" >
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="ukuranproduk">Ukuran Produk</label>
                                     <input type="text"
                                            class="form-control"
-                                           id="ukuranproduk" required>
+                                           id="ukuranproduk" >
                                     <code>Panjang x Lebar x Tinggi (cm), Jika cair kosongkan!</code>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="volumeproduk">Volume Produk</label>
                                     <input type="number"
                                            class="form-control"
-                                           id="volumeproduk" required>
+                                           id="volumeproduk">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label>Kriteria Produk</label>
@@ -60,7 +60,7 @@
                                                 <th class="text-white text-center">Kriteria Produk</th>
                                                 <th class="text-white text-center">Pilih Kriteria Produk</th>
 
-
+                                                
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white">
@@ -87,9 +87,10 @@
                                             foreach ($kriteria as $r) : ?>
                                                 <tr>
                                                 <td style="text-align: center"><?php echo $no++ ?></td>
-                                                <td><?php echo $r->kriteria_produk ?></td>
-                                                <td style="text-align: center">
-                                                <input class="form-check-input" type="checkbox" id="defaultCheck1">
+                                                    <td><?php echo $r->kriteria_produk ?></td>
+                                                    <td style="text-align: center">
+                                                    <input class="form-check-input" type="checkbox" id="defaultCheck1" name="kriteria[]" value="<?php echo $r->id ?>">
+
                                                 </td>
                                                 </tr>
                                             <?php endforeach ?>

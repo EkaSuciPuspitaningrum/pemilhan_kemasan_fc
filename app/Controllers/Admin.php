@@ -26,15 +26,16 @@ class Admin extends BaseController
         return view('admin/home');
     }
 
-    public function jenis_kemasan()
+    public function jenis_kemasan_admin()
     {
         $kemasan = new JenisKemasan();
-        $data = $kemasan->findAll();
+        $dataa = $kemasan->findAll();
         
         return view('admin/jenis_kemasan', [
-            'data' => $data
+            'dataa' => $dataa,
         ]);
     }
+    
 
     public function jenis_kemasan_create()
     {
@@ -53,10 +54,10 @@ class Admin extends BaseController
             ]);
             
             $session->setFlashdata('sukses', 'Data berhasil ditambah.');
-            return redirect()->to('/jenis_kemasan');
+            return redirect()->to('/jenis_kemasan_admin');
         }else{
             $session->setFlashdata('gagal', 'Data gagal ditambah.');
-            return redirect()->to('/jenis_kemasan');
+            return redirect()->to('/jenis_kemasan_admin');
         }
     }
 
@@ -75,35 +76,50 @@ class Admin extends BaseController
         // $kemasan = new JenisKemasan();
         // $kemasan->delete($id);
         
-        // return redirect()->to('admin/jenis_kemasan'[
-        // // return view('admin/jenis_kemasan', [
-        // ]);
+        return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
+
     }
 
-    // public function delete($id)
-    // {
-    //     $model = new ProductModel();
-    //     $model->delete($id);
-    //     return redirect()->to('/products')->with('success', 'Product deleted successfully');
-    // }
+    public function add_edit_data($id = null)
+{
+    $kemasan = new JenisKemasan();
+    $dataa = $kemasan->findAll();
 
-    // public function jenis_kemasan_edit($id)
-    // {   
-    //     $kemasan = new JenisKemasan();
-    //     $data = $kemasan->whereId($id)->first();
-        
-    //     return view('admin/jenis_kemasan', [
-    //         'data' => $data
-    //     ]);
-    // }
+    $data = [];
 
-    public function jenis_kemasan_edit($id)
-    {
+    if ($id !== null) {
         $kemasan = new JenisKemasan();
-        $data['data'] = $kemasan->find($id);
-
-        return view('admin/jenis_kemasan', $data);
+        $data = $kemasan->find($id);
     }
+    if ($this->request->getMethod() === 'post') {
+        $formData = $this->request->getPost();
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'jenis_kemasan' => 'required',
+            'keterangan_kemasan' => 'required'
+        ]);
+
+        if ($validation->withRequest($this->request)->run()) {
+            if ($id !== null) {
+                $kemasan->update($id, $formData);
+            }
+            else {
+                $kemasan->insert($formData);
+            }
+            return redirect()->to('/jenis_kemasan_admin');
+        } else {
+            return view('admin/jenis_kemasan', [
+                'data' => $formData,
+                'validation' => $validation
+            ]);
+        }
+    }
+    return view('admin/jenis_kemasan', [
+        'data' => $data,
+        'dataa' => $dataa
+    ]);
+}
+
 
     public function jenis_kemasan_update($id)
     {
@@ -123,18 +139,6 @@ class Admin extends BaseController
             return redirect()->back()->withInput()->with('errors', $kemasan->errors());
         }
     }
-
-
-    // public function jenis_kemasan_update($id)
-    // {
-        
-    //     $this->jeniskemasan->update($id, [
-    //         'jenis_kemasan' => $this->request->getPost('jenis_kemasan'),
-    //         'keterangan_kemasan' => $this->request->getPost('keterangan_kemasan'),
-    //         ]);
-
-    //         return redirect('admin/jenis_kemasan')->with('success', 'Data Updated Successfully');
-    // }
 
 
     public function kriteria_produk()

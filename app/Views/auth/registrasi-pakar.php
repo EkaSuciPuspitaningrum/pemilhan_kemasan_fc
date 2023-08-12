@@ -45,12 +45,12 @@
 
                     <div class="row">
                       <div class="form-group col-6">
-                        <label for="first_name_pakar">Nama Pertama</label>
-                        <input id="first_name_pakar" type="text" class="form-control" required name="first_name_pakar" autofocus="" spellcheck="false" data-ms-editor="true" required> 
+                        <label for="first_name">Nama Pertama</label>
+                        <input id="first_name" type="text" class="form-control" required name="first_name" autofocus="" spellcheck="false" data-ms-editor="true" required> 
                       </div>
                       <div class="form-group col-6">
-                        <label for="last_name_pakar">Nama Terakhir</label>
-                        <input id="last_name_pakar" type="text" class="form-control" name="last_name_pakar">
+                        <label for="last_name">Nama Terakhir</label>
+                        <input id="last_name" type="text" class="form-control" name="last_name">
                       </div>
                     </div>
                     
@@ -73,16 +73,16 @@
 
                     <div class="row">
                       <div class="form-group col-6">
-                        <label for="pend_terakhir">Pendidikan Terakhir</label>
-                        <select name="pend_terakhir" id="pend_terakhir" class="form-control">
+                        <label for="pendidikan">Pendidikan Terakhir</label>
+                        <select name="pendidikan" id="pendidikan" class="form-control">
                           <option value="D4/S1/Setara">D4/S1/Setara</option>
                           <option value="S2/Setara">S2/Setara</option>
                           <option value="S3/Setara">S3/Setara</option>
                         </select>
                       </div>
                       <div class="form-group col-6">
-                        <label for="nama_instansi">Nama Instansi</label>
-                        <input id="nama_instansi" type="text" required class="form-control" name="nama_instansi" autofocus="" spellcheck="false" data-ms-editor="true">
+                        <label for="instansi">Nama Instansi</label>
+                        <input id="instansi" type="text" required class="form-control" name="instansi" autofocus="" spellcheck="false" data-ms-editor="true">
                       </div>
                     </div>
                     

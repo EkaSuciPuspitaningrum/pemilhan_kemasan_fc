@@ -6,13 +6,14 @@ use App\Models\Admin as ModelsAdmin;
 use App\Models\BasisPengetahuan;
 use App\Models\JenisKemasan;
 use App\Models\KriteriaProduk;
+use App\Models\Pakar;
 
 class Admin extends BaseController
 {  
     protected $jeniskemasan;
     protected $kriteriaproduk;
     protected $pengetahuan;
-    protected $dataadmin;
+    protected $datapakar;
 
  
     function __construct()
@@ -20,7 +21,7 @@ class Admin extends BaseController
         $this->jeniskemasan = new JenisKemasan();
         $this->kriteriaproduk = new KriteriaProduk();
         $this->pengetahuan = new BasisPengetahuan();
-        $this->dataadmin = new ModelsAdmin();
+        $this->datapakar = new ModelsAdmin();
 
     }
     
@@ -206,8 +207,8 @@ class Admin extends BaseController
     //data admin
     public function data_admin()
     {
-        $dataadmin = new ModelsAdmin();
-        $dataa = $dataadmin->findAll();
+        $datapakar = new ModelsAdmin();
+        $dataa = $datapakar->findAll();
 
         return view('admin/data-admin', [
             'dataa' => $dataa
@@ -242,8 +243,8 @@ class Admin extends BaseController
     //hapus data admin
     public function data_admin_delete($id)
     {
-        $dataadmin = new ModelsAdmin();
-        $dataadmin->delete($id);
+        $datapakar = new ModelsAdmin();
+        $datapakar->delete($id);
         
         return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
 
@@ -252,8 +253,8 @@ class Admin extends BaseController
     //edit data admin
     public function add_edit_data_admin($id = null)
     {
-        $dataadmin = new ModelsAdmin();
-        $dataa = $dataadmin->findAll();
+        $datapakar = new ModelsAdmin();
+        $dataa = $datapakar->findAll();
 
         $data = [];
 
@@ -271,10 +272,10 @@ class Admin extends BaseController
 
             if ($validation->withRequest($this->request)->run()) {
                 if ($id !== null) {
-                    $dataadmin->update($id, $formData);
+                    $datapakar->update($id, $formData);
                 }
                 else {
-                    $dataadmin->insert($formData);
+                    $datapakar->insert($formData);
                 }
                 return redirect()->to('/data_admin_admin')->with('sukses', 'Data berhasil diubah.');
             } else {
@@ -285,93 +286,6 @@ class Admin extends BaseController
             }
         }
         return view('admin/data-admin', [
-            'data' => $data,
-            'dataa' => $dataa
-        ]);
-    }
-
-    //data pakar
-    public function data_pakar()
-    {
-        $datapakar = new DataPakar();
-        $dataa = $datapakar->findAll();
-
-        return view('admin/data-pakar', [
-            'dataa' => $dataa
-        ]);
-    }
-
-    //simpan data pakar
-    public function data_pakar_create()
-    {
-        $session = session();
-
-        $rules = [
-            'data_pakar'          => 'required',
-            'keterangan_data-pakar'       => 'required',
-        ];
-        
-          
-        if($this->validate($rules)){
-            $this->jeniskemasan->insert([
-                'data_pakar'     => $this->request->getPost('data_pakar'),
-                'keterangan_data_admin'    => $this->request->getPost('keterangan_data_pakar')
-            ]);
-            
-            $session->setFlashdata('sukses', 'Data berhasil ditambah.');
-            return redirect()->to('/data-admin_pakar');
-        }else{
-            $session->setFlashdata('gagal', 'Data gagal ditambah.');
-            return redirect()->to('/data-admin_pakar');
-        }
-    }
-
-    //hapus data pakar
-    public function data_pakar_delete($id)
-    {
-        $datapakar = new DataPakar();
-        $datapakar->delete($id);
-        
-        return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
-
-    }
-
-    //edit data pakar
-    public function add_edit_data_pakar($id = null)
-    {
-        $datapakar = new DataPakar();
-        $dataa = $datapakar->findAll();
-
-        $data = [];
-
-        if ($id !== null) {
-            $datapakar = new ModelsAdmin();
-            $data = $datapakar->find($id);
-        }
-        if ($this->request->getMethod() === 'post') {
-            $formData = $this->request->getPost();
-            $validation = \Config\Services::validation();
-            $validation->setRules([
-                'data_pakar' => 'required',
-                'keterangan_data_pakar' => 'required'
-            ]);
-
-            if ($validation->withRequest($this->request)->run()) {
-                if ($id !== null) {
-                    $dataadmin->update($id, $formData);
-                }
-                else {
-                    $dataadmin->insert($formData);
-                }
-                return redirect()->to('/data_admin_pakar')->with('sukses', 'Data berhasil diubah.');
-            } else {
-                return view('admin/data-pakar', [
-                    'data' => $formData,
-                    'validation' => $validation
-                ]);
-            }
-        }
-        return view('admin/data-pakar', [
             'data' => $data,
             'dataa' => $dataa
         ]);

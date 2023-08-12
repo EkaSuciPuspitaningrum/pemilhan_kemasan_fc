@@ -38,7 +38,7 @@ $routes->post('/login_admin', 'Auth::aksi_login');
 $routes->get('/login_pakar', 'Auth::login_pakar');
 $routes->post('/login_pakar', 'Auth::aksi_login_pakar');
 $routes->get('/registrasi_pakar', 'Auth::registrasi_pakar');
-$routes->post('/registrasi_pakar', 'Auth::registrasi');
+$routes->post('/registrasi_pakar', 'Auth::registrasi_pakar_create');
 
 $routes->get('data_admin', 'Admin::data_admin');
 
@@ -72,7 +72,7 @@ $routes->get('/kriteria/hapus/(:num)', 'Admin::kriteria_delete/$1');
 $routes->get('/basis_pengetahuan', 'Admin::basis_pengetahuan');
 $routes->post('/basis_pengetahuan', 'Admin::basis_pengetahuan_create');
 
-$routes->get('/akun', 'Admin::akun');
+$routes->get('/data_pakar', 'Admin::data_pakar');
 $routes->get('/logout_admin', 'Admin::logout');
 
 $routes->get('/dashboard_pakar', 'Pakar::dashboard_pakar');

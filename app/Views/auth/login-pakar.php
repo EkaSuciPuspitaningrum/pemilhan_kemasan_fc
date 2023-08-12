@@ -38,8 +38,25 @@
                         </h4>
                         <p class="text-muted">Sebelum memulai, Anda harus masuk atau mendaftar jika Anda belum memiliki akun</p>
                         <br>
+                        <?php if(session()->getFlashdata('alert')):?>
+                                <div class="alert alert-warning alert-dismissible show fade">
+                                <div class="alert-body">
+                                    <button class="close" data-dismiss="alert">
+                                    <span>&times;</span>
+                                    </button>
+                                    <?= session()->getFlashdata('alert') ?>
+                                </div>
+                            </div>
+                        <?php endif;?>
                         <?php if(session()->getFlashdata('msg')):?>
-                            <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
+                                <div class="alert alert-danger alert-dismissible show fade">
+                                <div class="alert-body">
+                                    <button class="close" data-dismiss="alert">
+                                    <span>&times;</span>
+                                    </button>
+                                    <?= session()->getFlashdata('msg') ?>
+                                </div>
+                            </div>
                         <?php endif;?>
                          <form method="POST"
                             class="needs-validation"

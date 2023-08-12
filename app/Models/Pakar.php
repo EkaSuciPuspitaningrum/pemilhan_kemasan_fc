@@ -7,20 +7,30 @@ use CodeIgniter\Model;
 class Pakar extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'pakars';
+    protected $table            = 'pakar';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
+    protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields = [
+        'id',
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'password_hash',
+        'pendidikan',
+        'instansi',
+        'dokumen',
+        'created_date', 'updated_date'];
 
     // Dates
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $createdField  = 'created_date';
+    protected $updatedField  = 'updated_date';
+    // protected $deletedField  = 'deleted_at';
 
     // Validation
     protected $validationRules      = [];

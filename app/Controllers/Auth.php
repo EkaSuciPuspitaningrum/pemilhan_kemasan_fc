@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Admin;
+use App\Models\CalonPakar;
 use App\Models\Pakar;
 
 class Auth extends BaseController
@@ -47,6 +48,35 @@ class Auth extends BaseController
    public function registrasi_pakar()
    {
        return view('auth/registrasi-pakar');
+   }
+
+   public function registrasi_pakar_create()
+   {
+       $model = new CalonPakar();
+
+       if ($this->request->getMethod() === 'post') {
+           $formData = $this->request->getPost();
+           // You can add validation here before inserting data
+           
+           // Hash the password
+            $hashedPassword = password_hash($formData['password'], PASSWORD_DEFAULT);
+            $formData['password_hash'] = $hashedPassword;
+
+           // Handle file upload
+           $file = $this->request->getFile('dokumen');
+           $fileName = $file->getRandomName();
+           $file->move(ROOTPATH . 'public/uploads', $fileName);
+
+           // Add file name to form data
+           $formData['dokumen'] = $fileName;
+
+           // Insert data into the database
+           $model->insert($formData);
+
+           return redirect()->to('/login_pakar')->with('alert', 'Data akan dicek oleh Admin.'); 
+       }
+
+       return view('auth/registrasi-pakar'); 
    }
 
    public function login_pakar()

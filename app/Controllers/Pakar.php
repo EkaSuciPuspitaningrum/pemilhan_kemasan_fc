@@ -27,6 +27,7 @@ class Pakar extends BaseController
         return view('pakar/home');
     }
 
+    //data jenis kemasan
     public function jenis_kemasan()
     {
         $kemasan = new JenisKemasan();
@@ -37,6 +38,7 @@ class Pakar extends BaseController
         ]);
     }
 
+    //simpan data
     public function jenis_kemasan_create()
     {
         $session = session();
@@ -61,27 +63,55 @@ class Pakar extends BaseController
         }
     }
 
+    //hapus data
     public function jenis_kemasan_delete($id)
     {
         $kemasan = new JenisKemasan();
         $kemasan->delete($id);
         
-        return view('pakar/jenis_kemasan', [
-        ]);
+        return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
     }
 
-    public function jenis_kemasan_edit($id)
+    //edit data
+    public function add_edit_data($id = null)
     {
         
-        $this->jeniskemasan->update($id, [
-            'id' => $this->request->getPost('id'),
-            'jenis_kemasan' => $this->request->getPost('jenis_kemasan'),
-            'keterangan_kemasan' => $this->request->getPost('keterangan_kemasan'),
-            'created_date' => $this->request->getPost('created_date'),
-            'updated_date' => $this->request->getPost('updated_date'),
+        $kemasan = new JenisKemasan();
+        $data = $kemasan->findAll();
+
+        $data = [];
+
+        if ($id !== null) {
+            $kemasan = new JenisKemasan();
+            $data = $kemasan->find($id);
+        }
+        if ($this->request->getMethod() === 'post') {
+            $formData = $this->request->getPost();
+            $validation = \Config\Services::validation();
+            $validation->setRules([
+                'jenis_kemasan' => 'required',
+                'keterangan_kemasan' => 'required'
             ]);
 
-            return redirect('pakar/jenis_kemasan')->with('success', 'Data Updated Successfully');
+            if ($validation->withRequest($this->request)->run()) {
+                if ($id !== null) {
+                    $kemasan->update($id, $formData);
+                }
+                else {
+                    $kemasan->insert($formData);
+                }
+                return redirect()->to('/jenis_kemasan_pakar')->with('sukses', 'Data berhasil diubah.');
+            } else {
+                return view('pakar/jenis_kemasan', [
+                    'data' => $formData,
+                    'validation' => $validation
+                ]);
+            }
+        }
+        return view('pakar/jenis_kemasan', [
+            'data' => $data,
+            'dataa' => $dataa
+        ]);
     }
 
     public function kriteria_produk()
@@ -133,6 +163,11 @@ class Pakar extends BaseController
             'kriteria' => $kriteria,
             
         ]);
+    }
+
+    public function akun()
+    {
+        return view('pakar/akun');
     }
 
 }

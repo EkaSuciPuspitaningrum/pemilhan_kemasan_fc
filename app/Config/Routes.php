@@ -31,7 +31,7 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
-//autentikasi (login, regis dan kawan2)
+//autentikasi (login, regis admin pakar)
 $routes->get('/login_admin', 'Auth::login_admin');
 $routes->post('/login_admin', 'Auth::aksi_login');
 
@@ -46,9 +46,17 @@ $routes->post('/registrasi_pakar', 'Auth::registrasi');
 $routes->get('/dashboard_admin', 'Admin::dashboard_admin');
 
 $routes->get('/jenis_kemasan_admin', 'Admin::jenis_kemasan_admin');
+
+//crud di 3 ini, terapin juga di pakar, ini samain aja dan namanya tinggal ganti Admin ke Pakar
+// crud jenis kemasan admin
 $routes->post('/jenis_kemasan_create', 'Admin::jenis_kemasan_create');
 $routes->add('add_edit_data/(:num)?', 'Admin::add_edit_data/$1');
 $routes->get('/jenis_kemasan/hapus/(:num)', 'Admin::jenis_kemasan_delete/$1');
+
+//crud jenis kemasan pakar
+$routes->post('/jenis_kemasan_create', 'Pakar::jenis_kemasan_create');
+$routes->add('add_edit_data/(:num)?', 'Pakar::add_edit_data/$1');
+$routes->get('/jenis_kemasan/hapus/(:num)', 'Pakar::jenis_kemasan_delete/$1');
 
 $routes->get('/kriteria_produk', 'Admin::kriteria_produk');
 $routes->post('/kriteria_produk', 'Admin::kriteria_produk_create');

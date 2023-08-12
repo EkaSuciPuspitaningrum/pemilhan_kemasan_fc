@@ -26,6 +26,7 @@ class Admin extends BaseController
         return view('admin/home');
     }
 
+    //data jenis kemasan
     public function jenis_kemasan_admin()
     {
         $kemasan = new JenisKemasan();
@@ -36,7 +37,7 @@ class Admin extends BaseController
         ]);
     }
     
-
+    //buat simpan data
     public function jenis_kemasan_create()
     {
         $session = session();
@@ -61,6 +62,8 @@ class Admin extends BaseController
         }
     }
 
+
+    //hapus data
     public function jenis_kemasan_delete($id)
     {
         $kemasan = new JenisKemasan();
@@ -70,45 +73,47 @@ class Admin extends BaseController
 
     }
 
+
+    //edit data (harusnya bisa buat tambah data tapi ga bisa)-> samain aja dibagian paka tapi ditaruh di controller pakar
     public function add_edit_data($id = null)
-{
-    $kemasan = new JenisKemasan();
-    $dataa = $kemasan->findAll();
-
-    $data = [];
-
-    if ($id !== null) {
+    {
         $kemasan = new JenisKemasan();
-        $data = $kemasan->find($id);
-    }
-    if ($this->request->getMethod() === 'post') {
-        $formData = $this->request->getPost();
-        $validation = \Config\Services::validation();
-        $validation->setRules([
-            'jenis_kemasan' => 'required',
-            'keterangan_kemasan' => 'required'
-        ]);
+        $dataa = $kemasan->findAll();
 
-        if ($validation->withRequest($this->request)->run()) {
-            if ($id !== null) {
-                $kemasan->update($id, $formData);
-            }
-            else {
-                $kemasan->insert($formData);
-            }
-            return redirect()->to('/jenis_kemasan_admin')->with('sukses', 'Data berhasil diubah.');
-        } else {
-            return view('admin/jenis_kemasan', [
-                'data' => $formData,
-                'validation' => $validation
-            ]);
+        $data = [];
+
+        if ($id !== null) {
+            $kemasan = new JenisKemasan();
+            $data = $kemasan->find($id);
         }
+        if ($this->request->getMethod() === 'post') {
+            $formData = $this->request->getPost();
+            $validation = \Config\Services::validation();
+            $validation->setRules([
+                'jenis_kemasan' => 'required',
+                'keterangan_kemasan' => 'required'
+            ]);
+
+            if ($validation->withRequest($this->request)->run()) {
+                if ($id !== null) {
+                    $kemasan->update($id, $formData);
+                }
+                else {
+                    $kemasan->insert($formData);
+                }
+                return redirect()->to('/jenis_kemasan_admin')->with('sukses', 'Data berhasil diubah.');
+            } else {
+                return view('admin/jenis_kemasan', [
+                    'data' => $formData,
+                    'validation' => $validation
+                ]);
+            }
+        }
+        return view('admin/jenis_kemasan', [
+            'data' => $data,
+            'dataa' => $dataa
+        ]);
     }
-    return view('admin/jenis_kemasan', [
-        'data' => $data,
-        'dataa' => $dataa
-    ]);
-}
 
 
 

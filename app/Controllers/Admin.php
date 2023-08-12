@@ -37,7 +37,7 @@ class Admin extends BaseController
         ]);
     }
     
-    //buat simpan data
+    //simpan data
     public function jenis_kemasan_create()
     {
         $session = session();
@@ -62,7 +62,6 @@ class Admin extends BaseController
         }
     }
 
-
     //hapus data
     public function jenis_kemasan_delete($id)
     {
@@ -73,8 +72,7 @@ class Admin extends BaseController
 
     }
 
-
-    //edit data (harusnya bisa buat tambah data tapi ga bisa)-> samain aja dibagian paka tapi ditaruh di controller pakar
+    //edit data
     public function add_edit_data($id = null)
     {
         $kemasan = new JenisKemasan();

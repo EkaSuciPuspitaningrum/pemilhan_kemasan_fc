@@ -291,6 +291,16 @@ class Admin extends BaseController
         ]);
     }
 
+    public function data_pakar()
+    {
+        $datapakar = new Pakar();
+        $dataa = $datapakar->findAll();
+
+        return view('admin/data-pakar', [
+            'dataa' => $dataa
+        ]);
+    }
+
     //logout
     public function logout() 
     {

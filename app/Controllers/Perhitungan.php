@@ -51,17 +51,18 @@ class Perhitungan extends BaseController
         // Calculate jenis kemasan percentage for each basis_pengetahuan
         $jenisKemasanPercentage = [];
         foreach ($basisPengetahuanData as $row) {
-            $jenisKemasan = $this->getJenisKemasan($row);
-            if (!isset($jenisKemasanPercentage[$jenisKemasan])) {
-                $jenisKemasanPercentage[$jenisKemasan] = 0;
+            $jenisKemasanInfo = $this->getJenisKemasan($row);
+            if (!isset($jenisKemasanPercentage[$jenisKemasanInfo['jenis_kemasan']])) {
+                $jenisKemasanPercentage[$jenisKemasanInfo['jenis_kemasan']] = 0;
             }
-            $jenisKemasanPercentage[$jenisKemasan] += ($matchingRulesCount / $totalRulesCount) * 100;
+            $jenisKemasanPercentage[$jenisKemasanInfo['jenis_kemasan']] += ($matchingRulesCount / $totalRulesCount) * 100;
         }
 
         // Get jenis kemasan data for each basis_pengetahuan
         $jenisKemasanData = [];
         foreach ($basisPengetahuanData as $row) {
-            $jenisKemasanData[] = $this->getJenisKemasan($row);
+            $jenisKemasanInfo = $this->getJenisKemasan($row);
+            $jenisKemasanData[] = $jenisKemasanInfo;
         }
 
         // Find the highest percentage of jenis kemasan
@@ -71,6 +72,14 @@ class Perhitungan extends BaseController
         // Convert the highest percentage to percent format
         $highestPercentageFormatted = number_format($highestPercentageJenisKemasan/ 10, 2) . '%';
 
+        $keteranganKemasanModel = new JenisKemasan(); // Adjust with your actual model
+        $keteranganKemasan = $keteranganKemasanModel->find($jenisKemasanNameWithHighestPercentage);
+        
+        // Check if $keteranganKemasan is not null before accessing its property
+        $keteranganKemasanText = ($keteranganKemasan !== null) ? $keteranganKemasan->keterangan_kemasan : 'No keterangan available';
+        
+
+         
         $hasilpencarian = new RiwayatPencarian();
 
         // Get data from the form
@@ -99,6 +108,7 @@ class Perhitungan extends BaseController
             'highestPercentageJenisKemasan' => $highestPercentageJenisKemasan,
             'jenisKemasanNameWithHighestPercentage' => $jenisKemasanNameWithHighestPercentage,
             'highestPercentageFormatted' => $highestPercentageFormatted,
+            'keteranganKemasan' => $keteranganKemasanText
         ];
 
         return view('user/hasil-pencarian', $data);
@@ -106,13 +116,17 @@ class Perhitungan extends BaseController
 
     private function getJenisKemasan($basisPengetahuan)
     {
-        $jenisKemasanModel = new JenisKemasan(); 
+        $jenisKemasanModel = new JenisKemasan();
         $jenisKemasan = $jenisKemasanModel->find($basisPengetahuan->jenis_kemasan_id);
     
         if ($jenisKemasan) {
-            return $jenisKemasan->jenis_kemasan;
+            return [
+                'jenis_kemasan' => $jenisKemasan->jenis_kemasan,
+                'keterangan_kemasan' => $jenisKemasan->keterangan_kemasan,
+            ];
         }
     
         return null;
     }
+    
 }

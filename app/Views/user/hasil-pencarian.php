@@ -56,7 +56,14 @@
                         </div>
                     </div>
                     
-                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Penjelasan Kemasan :</h4>
+                        </div>
+                        <div class="card-body">
+                            <p><?= $keteranganKemasan ?></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

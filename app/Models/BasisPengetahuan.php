@@ -31,4 +31,14 @@ class BasisPengetahuan extends Model
     {
         return $this->belongsTo(JenisKemasan::class, 'jenis_kemasan_id');
     }
+
+    public function insertData($jenisKemasanId, $kriteriaProdukId)
+    {
+        $data = [
+            'jenis_kemasan_id' => $jenisKemasanId,
+            'kriteria_produk_id' => $kriteriaProdukId,
+        ];
+
+        $this->insert($data);
+    }
 }

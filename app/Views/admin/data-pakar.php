@@ -149,15 +149,16 @@
                             <h4>Ubah Data</h4>
                         </div>
                         <div class="card-body">
-                        <form action="<?= base_url('add_edit_data_pakar/'. ($data->id ?? '')); ?>" method="POST" enctype="multipart/form-data">
+
+                            <form action="<?= base_url('add_edit_data_pakar/' . ($data->id ?? '')); ?>" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
-                                        <label for="first_name">Nama Pertama</label>
-                                        <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo $data->first_name ?? ''; ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="last_name">Nama Terakhir</label>
-                                        <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo $data->last_name ?? ''; ?>">
-                                    </div>
+                                    <label for="first_name">Nama Pertama</label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" value="<?= $data->first_name ?? ''; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="last_name">Nama Terakhir</label>
+                                    <input type="text" class="form-control" id="last_name" name="last_name" value="<?= $data->last_name ?? ''; ?>">
+                                </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="text" class="form-control" id="email" name="email" value="<?php echo $data->email ?? ''; ?>">
@@ -180,7 +181,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="dokumen">Curriculum Vitae (CV) / Daftar Riwayat Hidup</label>
-                                    <code><p>Dokumen saat ini: <?php echo $data->dokumen ?? ''; ?></p></code>
+                                    <code><p>Dokumen saat ini: <?= $data->dokumen ?? ''; ?></p></code>
                                     <div class="input-group mb-3">
                                         <input type="file" class="form-control" required id="dokumen" name="dokumen">
                                         <label class="input-group-text" for="customFile">Upload</label>
@@ -190,6 +191,7 @@
                                     <button type="submit" class="btn btn-warning">Edit</button>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>

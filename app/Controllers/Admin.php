@@ -360,67 +360,84 @@ class Admin extends BaseController
    }
 
    public function add_edit_data_pakar($id = null)
-   {
-       $dataapakar = new Pakar();
-       $data_pakar = $dataapakar->findAll();
-          
-       $datacalonpakar = new CalonPakar();
-       $data_calon = $datacalonpakar->findAll();
-      
-       if ($id !== null) {
-           $datapakar = new Pakar();
-           $data = $datapakar->find($id); 
-       }
-      
-       if ($this->request->getMethod() === 'post') {
-           $formData = $this->request->getPost();
-           $file = $this->request->getFile('dokumen');
-      
-           if ($file->isValid() && !$file->hasMoved()) {
-               $newFileName = $file->getRandomName();
-               $file->move(ROOTPATH . 'public/uploads', $newFileName);
-               $formData['dokumen'] = $newFileName;
-           } else {
-               $formData['dokumen'] = $data->dokumen ?? ''; 
-           }
-   
-           // Hash the password before saving
-           $formData['password_hash'] = password_hash($formData['password'], PASSWORD_DEFAULT);
-      
-           $validation = \Config\Services::validation();
-           $validation->setRules([
-               'first_name' => 'required',
-               'last_name' => 'required',
-               'email' => 'required',
-               'password' => 'required',
-               'pendidikan' => 'required',
-               'instansi' => 'required',
-               'dokumen' => 'required',
-           ]);
-      
-           if ($validation->withRequest($this->request)->run()) {
-               if ($id !== null) {
-                   $datapakar->update($id, $formData);
-               } else {
-                   $datapakar->insert($formData);
-               }
-               return redirect()->to('/data_pakar')->with('sukses', 'Data berhasil diubah.');
-           } else {
-               return view('admin/data-pakar', [
-                   'data' => $formData,
-                   'validation' => $validation,
-                   'data_pakar' => $data_pakar,
-                   'data_calon' => $data_calon
-               ]);
-           }
-       }
-      
-       return view('admin/data-pakar', [
-           'data' => $data,
-           'data_pakar' => $data_pakar,
-           'data_calon' => $data_calon
-       ]);
-   }
+{
+    // Create instances of your models
+    $dataapakar = new Pakar();
+    $data_pakar = $dataapakar->findAll();
+       
+    $datacalonpakar = new CalonPakar();
+    $data_calon = $datacalonpakar->findAll();
+
+    // Initialize an empty data object for editing
+    $data = (object)[];
+
+    // Check if editing an existing record
+    if ($id !== null) {
+        $datapakar = new Pakar();
+        $data = $datapakar->find($id);
+    }
+
+    // Check if the form is submitted
+    if ($this->request->getMethod() === 'post') {
+        $formData = $this->request->getPost();
+        $file = $this->request->getFile('dokumen');
+
+        // Handle file upload
+        if ($file->isValid() && !$file->hasMoved()) {
+            $newFileName = $file->getRandomName();
+            $file->move(ROOTPATH . 'public/uploads', $newFileName);
+            $formData['dokumen'] = $newFileName;
+        } else {
+            $formData['dokumen'] = $data->dokumen ?? '';
+        }
+
+        // Hash the password before saving
+        $formData['password_hash'] = password_hash($formData['password'], PASSWORD_DEFAULT);
+
+        // Define validation rules
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'pendidikan' => 'required',
+            'instansi' => 'required',
+            'dokumen' => 'required',
+        ]);
+
+        // Run validation
+        if ($validation->withRequest($this->request)->run()) {
+            $datapakar = new Pakar();
+
+            // Check if editing or inserting
+            if ($id !== null) {
+                $datapakar->update($id, $formData);
+            } else {
+                $datapakar->insert($formData);
+            }
+
+            // Redirect after successful update/insert
+            return redirect()->to('/data_pakar')->with('sukses', 'Data berhasil diubah.');
+        } else {
+            // If validation fails, show the form with errors
+            return view('admin/data-pakar', [
+                'data' => $formData,
+                'validation' => $validation,
+                'data_pakar' => $data_pakar,
+                'data_calon' => $data_calon
+            ]);
+        }
+    }
+
+    // Display the form for editing or adding
+    return view('admin/data-pakar', [
+        'data' => $data,
+        'data_pakar' => $data_pakar,
+        'data_calon' => $data_calon
+    ]);
+}
+
 
    public function show_data($id = null)
    {
@@ -433,7 +450,16 @@ class Admin extends BaseController
        ]);
    }
    
-   
+   public function show_data_pakar($id = null)
+   {
+  
+       $datapakar = new Pakar();
+       $data = $datapakar->find($id); 
+
+       return view('admin/show-data-pakar', [
+           'data' => $data
+       ]);
+   }
 
    public function transfer_data($id)
    {

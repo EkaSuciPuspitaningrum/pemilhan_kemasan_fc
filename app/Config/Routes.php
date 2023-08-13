@@ -84,11 +84,10 @@ $routes->post('/jenis_kemasan_pakar_create', 'Pakar::jenis_kemasan_create');
 $routes->add('add_edit_pakar_data/(:num)?', 'Pakar::add_edit_data/$1');
 $routes->get('/jenis_kemasan_pakar/hapus/(:num)', 'Pakar::jenis_kemasan_delete/$1');
 
-
-// $routes->get('/kriteria_produk_pakar', 'Pakar::kriteria_produk');
-// $routes->post('/kriteria_produk_pakar', 'Pakar::kriteria_produk_create');
-// $routes->get('/kriteria_produk_pakar/edit', 'Pakar::kriteria_produk_edit');
-// $routes->post('/kriteria_produk_pakar/hapus(:num)', 'Pakar::kriteria_produk_delete/$1');
+$routes->get('/kriteria_produk_pakar', 'Pakar::kriteria_produk');
+$routes->post('/kriteria_produk_pakar', 'Pakar::kriteria_produk_create');
+$routes->add('add_edit_pakar_data_kriteria/(:num)?', 'Pakar::edit_data_kriteria/$1');
+$routes->get('/kriteria_produk_pakar/hapus/(:num)', 'Pakar::kriteria_produk_delete/$1');
 
 $routes->get('/pencarian_kemasan', 'User::pencarian_kemasan');
 $routes->post('/pencarian_kemasan', 'Perhitungan::pencarian');

@@ -117,7 +117,7 @@ class Pakar extends BaseController
     }
 
 
-    //data kriteria kemasan
+    //data kriteria
     public function kriteria_produk()
     {
         
@@ -144,15 +144,15 @@ class Pakar extends BaseController
             ]);
             
             $session->setFlashdata('sukses', 'Data berhasil ditambah.');
-            return redirect()->to('/kriteria_produk');
+            return redirect()->to('/kriteria_produk_pakar');
         }else{
             $session->setFlashdata('gagal', 'Data gagal ditambah.');
-            return redirect()->to('/kriteria_produk');
+            return redirect()->to('/kriteria_produk_pakar');
         }
     }
 
     //edit kriteria
-    public function edit_kriteria($id = null)
+    public function edit_data_kriteria($id = null)
     {
         $kriteriaa = new KriteriaProduk();
         $kriteria = $kriteriaa->findAll();
@@ -178,7 +178,7 @@ class Pakar extends BaseController
                 else {
                     $kriteriaa->insert($formData);
                 }
-                return redirect()->to('/kriteria_produk')->with('sukses', 'Data berhasil diubah.');
+                return redirect()->to('/kriteria_produk_pakar')->with('sukses', 'Data berhasil diubah.');
             } else {
                 return view('pakar/kriteria_produk', [
                     'data' => $formData,
@@ -193,7 +193,7 @@ class Pakar extends BaseController
     }
 
     //hapus data kriteria
-    public function kriteria_delete($id)
+    public function kriteria_produk_delete($id)
     {
         $kriteriaa = new KriteriaProduk();
         $kriteriaa->delete($id);

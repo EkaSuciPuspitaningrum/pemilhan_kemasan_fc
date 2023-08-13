@@ -15,11 +15,30 @@
             <h1>Data Admin</h1>
         </div>
         <div class="section-body">
-        <h2 class="section-title">Data Calon Pakar</h2>
+            <h2 class="section-title">Data Calon Pakar</h2>
             <p class="section-lead">Silahkan cek data calon pakar, jika sesuai silahkan approve.</p>
+            <?php if(session()->getFlashdata('sukses')):?>
+                <div class="alert alert-success alert-dismissible show fade">
+                    <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        <?= session()->getFlashdata('sukses') ?>
+                    </div>
+                </div>
+            <?php endif;?>
+            <?php if(session()->getFlashdata('msg')):?>
+                <div class="alert alert-success alert-dismissible show fade">
+                    <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        <?= session()->getFlashdata('msg') ?>
+                    </div>
+                </div>
+            <?php endif;?>
             <div class="row">
                     <div class="col-12">
-                        <br>
                         <div class="card">
                             <div class="card-header">
                                 <div>
@@ -57,9 +76,9 @@
                                                     <td><?= $row->instansi ?></td>
                                                     <td><?= $row->dokumen ?></td>
                                                     <td style="text-align: center"><?= $row->created_date ?></td>
-                                                    <td style="text-align: center">
-                                                        <a class="btn btn-warning" href="<?= base_url('add_edit_data/' . $row->id); ?>">LIHAT DATA</a>
-                                                        <a class="btn btn-danger" href="<?= base_url('data-admin/hapus/' . $row->id); ?>">HAPUS</a>
+                                                    <td>
+                                                        <a class="btn btn-warning" href="<?= base_url('show_data_calon/' . $row->id); ?>">LIHAT DATA</a>
+                                                        <a class="btn btn-danger" href="<?= base_url('data_calon_pakar/hapus/' . $row->id); ?>">HAPUS</a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -70,28 +89,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
             <h2 class="section-title">Data Pakar</h2>
             <p class="section-lead">Silahkan tambahkan, ubah maupun hapus data pakar.</p>
-            <?php if(session()->getFlashdata('sukses')):?>
-                <div class="alert alert-success alert-dismissible show fade">
-                    <div class="alert-body">
-                        <button class="close" data-dismiss="alert">
-                          <span>&times;</span>
-                        </button>
-                        <?= session()->getFlashdata('sukses') ?>
-                    </div>
-                </div>
-            <?php endif;?>
-            <?php if(session()->getFlashdata('gagal')):?>
-                <div class="alert alert-danger alert-dismissible show fade">
-                    <div class="alert-body">
-                        <button class="close" data-dismiss="alert">
-                          <span>&times;</span>
-                        </button>
-                        <?= session()->getFlashdata('gagal') ?>
-                    </div>
-                </div>
-            <?php endif;?>
             <div class="row">
                 <div class="col-6">
                     <div class="card">
@@ -99,15 +100,41 @@
                             <h4>Tambah Data</h4>
                         </div>
                         <div class="card-body">
-                            <form action="<?= base_url('data-admin_create'); ?>" method="POST">
+                            <form action="<?= base_url('data_pakar_create'); ?>" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="jenis_kemasan">Jenis Kemasan</label>
-                                    <input type="text" class="form-control" id="jenis_kemasan" name="jenis_kemasan">
-                                    <code>* Isi dengan data admin</code>
+                                        <label for="first_name">Nama Pertama</label>
+                                        <input type="text" class="form-control" id="first_name" name="first_name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last_name">Nama Terakhir</label>
+                                        <input type="text" class="form-control" id="last_name" name="last_name">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email" name="email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="keterangan_kemasan">Keterangan Kemasan</label>
-                                    <textarea class="form-control" style="height: 150px" name="keterangan_kemasan" required></textarea>
+                                    <label for="password">Password</label>
+                                    <input type="text" class="form-control" id="password" name="password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pendidikan">Pendidikan Terakhir</label>
+                                    <select name="pendidikan" id="pendidikan" class="form-control">
+                                        <option value="D4/S1/Setara">D4/S1/Setara</option>
+                                        <option value="S2/Setara">S2/Setara</option>
+                                        <option value="S3/Setara">S3/Setara</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="instansi">Instansi</label>
+                                    <input type="text" class="form-control" id="instansi" name="instansi">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dokumen">Curriculum Vitae (CV) / Daftar Riwayat Hidup</label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" required id="dokumen" name="dokumen">
+                                        <label class="input-group-text" for="customFile">Upload</label>
+                                    </div>
                                 </div>
                                 <div style="text-align-last: center;">
                                     <button type="submit" class="btn btn-primary">Simpan</button>
@@ -122,15 +149,42 @@
                             <h4>Ubah Data</h4>
                         </div>
                         <div class="card-body">
-                            <form action="<?= base_url('data-admin_create'); ?>" method="POST">
+                        <form action="<?= base_url('add_edit_data_pakar/'. ($data->id ?? '')); ?>" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="jenis_kemasan">Jenis Kemasan</label>
-                                    <input type="text" class="form-control" id="jenis_kemasan" name="jenis_kemasan">
-                                    <code>* Isi dengan data admin</code>
+                                        <label for="first_name">Nama Pertama</label>
+                                        <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo $data->first_name ?? ''; ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last_name">Nama Terakhir</label>
+                                        <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo $data->last_name ?? ''; ?>">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email" name="email" value="<?php echo $data->email ?? ''; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="keterangan_kemasan">Keterangan Kemasan</label>
-                                    <textarea class="form-control" style="height: 150px" name="keterangan_kemasan" required></textarea>
+                                    <label for="password">Password</label>
+                                    <input type="text" class="form-control" id="password" name="password" value="<?php echo $data->password ?? ''; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pendidikan">Pendidikan Terakhir</label>
+                                    <select name="pendidikan" id="pendidikan" class="form-control">
+                                        <option value="D4/S1/Setara" <?= ($data->pendidikan ?? '') === 'D4/S1/Setara' ? 'selected' : '' ?>>D4/S1/Setara</option>
+                                        <option value="S2/Setara" <?= ($data->pendidikan ?? '') === 'S2/Setara' ? 'selected' : '' ?>>S2/Setara</option>
+                                        <option value="S3/Setara" <?= ($data->pendidikan ?? '') === 'S3/Setara' ? 'selected' : '' ?>>S3/Setara</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="instansi">Instansi</label>
+                                    <input type="text" class="form-control" id="instansi" name="instansi" value="<?php echo $data->instansi ?? ''; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dokumen">Curriculum Vitae (CV) / Daftar Riwayat Hidup</label>
+                                    <code><p>Dokumen saat ini: <?php echo $data->dokumen ?? ''; ?></p></code>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" required id="dokumen" name="dokumen">
+                                        <label class="input-group-text" for="customFile">Upload</label>
+                                    </div>
                                 </div>
                                 <div style="text-align-last: center;">
                                     <button type="submit" class="btn btn-warning">Edit</button>
@@ -146,7 +200,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div>
-                                    <h4>Data Admin</h4>
+                                    <h4>Data Pakar</h4>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -181,8 +235,9 @@
                                                     <td><?= $row->dokumen ?></td>
                                                     <td style="text-align: center"><?= $row->created_date ?></td>
                                                     <td style="text-align: center">
-                                                        <a class="btn btn-warning" href="<?= base_url('add_edit_data/' . $row->id); ?>">LIHAT DATA</a>
-                                                        <a class="btn btn-danger" href="<?= base_url('data-admin/hapus/' . $row->id); ?>">HAPUS</a>
+                                                        <a class="btn btn-success" href="<?= base_url('show_data_pakar/' . $row->id); ?>">LIHAT DATA</a>
+                                                        <a class="btn btn-warning" href="<?= base_url('add_edit_data_pakar/' . $row->id); ?>">EDIT</a>
+                                                        <a class="btn btn-danger" href="<?= base_url('data_pakar/hapus/' . $row->id); ?>">HAPUS</a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>

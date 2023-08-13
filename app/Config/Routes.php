@@ -46,10 +46,14 @@ $routes->add('add_edit_data_admin/(:num)?', 'Admin::add_edit_data_admin/$1');
 $routes->get('/data_admin/hapus/(:num)', 'Admin::data_admin_delete/$1');
 
 $routes->get('data_pakar', 'Admin::data_pakar');
-
 $routes->post('/data_pakar_create', 'Admin::data_pakar_create');
 $routes->add('add_edit_data_pakar/(:num)?', 'Admin::add_edit_data_pakar/$1');
 $routes->get('/data_pakar/hapus/(:num)', 'Admin::data_pakar_delete/$1');
+
+$routes->get('data_calon_pakar', 'Admin::data_calon_pakar');
+$routes->add('show_data_calon/(:num)?', 'Admin::show_data/$1');
+$routes->post('transfer_data/(:num)', 'Admin::transfer_data/$1');
+$routes->get('/data_calon_pakar/hapus/(:num)', 'Admin::data_calon_pakar_hapus/$1');
 
 
 $routes->get('/dashboard_admin', 'Admin::dashboard_admin');

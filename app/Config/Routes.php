@@ -55,7 +55,6 @@ $routes->add('show_data_calon/(:num)?', 'Admin::show_data/$1');
 $routes->post('transfer_data/(:num)', 'Admin::transfer_data/$1');
 $routes->get('/data_calon_pakar/hapus/(:num)', 'Admin::data_calon_pakar_hapus/$1');
 
-
 $routes->get('/dashboard_admin', 'Admin::dashboard_admin');
 
 $routes->get('/jenis_kemasan_admin', 'Admin::jenis_kemasan_admin');
@@ -72,8 +71,16 @@ $routes->post('/kriteria_produk/hapus(:num)', 'Admin::kriteria_produk_delete/$1'
 $routes->add('edit_kriteria/(:num)?', 'Admin::edit_kriteria/$1');
 $routes->get('/kriteria/hapus/(:num)', 'Admin::kriteria_delete/$1');
 
-$routes->get('/basis_pengetahuan', 'Admin::basis_pengetahuan');
-$routes->post('/basis_pengetahuan', 'Admin::basis_pengetahuan_create');
+//$routes->get('/basis_pengetahuan', 'Admin::basis_pengetahuan');
+
+$routes->get('/basis_pengetahuan', 'Pakar::basis_pengetahuan');
+$routes->post('/basis_pengetahuan_create', 'Pakar::basis_pengetahuan_create');
+$routes->add('/basis_pengetahuan/edit','Pakar::basis_pengetahuan_edit');
+//$router->get('/basis_pengetahuan/hapus/(:num)','Pakar::basis_pengetahuan_delete/$1');
+
+$routes->add('edit_pengetahuan/(:num)?', 'Admin::edit_pengetahuan/$1');
+$routes->get('/pengetahuan/hapus/(:num)', 'Admin::pengetahuan_delete/$1');
+
 
 $routes->get('/data_pakar', 'Admin::data_pakar');
 $routes->get('/logout_admin', 'Admin::logout');

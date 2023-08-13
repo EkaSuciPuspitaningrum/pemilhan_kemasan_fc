@@ -49,14 +49,14 @@ class Admin extends BaseController
         $session = session();
 
         $rules = [
-            'jenis_kemasan'          => 'required',
+            'jenis_kemasan'            => 'required',
             'keterangan_kemasan'       => 'required',
         ];
         
           
         if($this->validate($rules)){
             $this->jeniskemasan->insert([
-                'jenis_kemasan'     => $this->request->getPost('jenis_kemasan'),
+                'jenis_kemasan'         => $this->request->getPost('jenis_kemasan'),
                 'keterangan_kemasan'    => $this->request->getPost('keterangan_kemasan')
             ]);
             

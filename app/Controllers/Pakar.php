@@ -221,6 +221,102 @@ class Pakar extends BaseController
         ]);
     }
 
+    //simpan data basis pengetahuan
+    public function basis_pengetahuan_create()
+    {
+        $session = session();
+
+        $rules = [
+            'jenis_kemasan'             => 'required',
+            'keterangan_kemasan'        => 'required',
+            'basis_pengetahuan'         => 'required',
+        ];
+        
+          
+        if($this->validate($rules)){
+            $this->pengetahuan->insert([
+                'jenis_kemasan'         => $this->request->getPost('jenis_kemasan'),
+                'keterangan_kemasan'    => $this->request->getPost('keterangan_kemasan'),
+                'basis_pengetahuan'     => $this->request->getpost('basis_pengetahuan'),
+            ]);
+            
+            $session->setFlashdata('sukses', 'Data berhasil ditambah.');
+            return redirect()->to('/basis_pengetahuan');
+        }else{
+            $session->setFlashdata('gagal', 'Data gagal ditambah.');
+            return redirect()->to('/basis_pengetahuan');
+        }
+    }
+
+    //edit basis pengetahuan
+    public function edit_pengetahuan($id = null)
+    {
+        $jeniskemasan = new JenisKemasan();
+        $kemasan = $jeniskemasan->findAll();
+       
+        $kriteriaproduk = new KriteriaProduk();
+        $kriteria = $kriteriaproduk->findAll();
+        
+        $pengetahuan = new BasisPengetahuan();
+        $data = $pengetahuan->findAll();
+
+        $data = [];
+
+        if ($id !== null) {
+            $jeniskemasan = new JenisKemasan();
+            $data = $jeniskemasan->find($id);
+
+            $kriteriaproduk = new KriteriaProduk();
+            $data = $kriteriaproduk->find($id);
+
+            $pengetahuan = new BasisPengetahuan();
+            $data = $pengetahuan->find($id);
+        }
+        if ($this->request->getMethod() === 'post') {
+            $formData = $this->request->getPost();
+            $validation = \Config\Services::validation();
+            $validation->setRules([
+                'jenis_kemasan'             => 'required',
+                'keterangan_kemasan'        => 'required',
+                'basis_pengetahuan'         => 'required',
+            ]);
+
+            if ($validation->withRequest($this->request)->run()) {
+                if ($id !== null) {
+                    $jeniskemasan->update($id, $formData);
+                    $kriteriaproduk->update($id, $formData);
+                    $pengetahuan->update($id, $formData);
+                }
+                else {
+                    $jeniskemasan->insert($formData);
+                    $kriteriaproduk->insert($formData);
+                    $pengetahuan->insert($formData);
+                }
+                return redirect()->to('/basis_pengetahuan')->with('sukses', 'Data berhasil diubah.');
+            } else {
+                return view('pakar/basis_pengetahuan', [
+                    'data' => $formData,
+                    'validation' => $validation
+                ]);
+            }
+        }
+        return view('pakar/basis_pengetahuan', [
+            'data' => $data,
+            'kemasan' => $kemasan,
+            'kriteria' => $kriteria,
+        ]);
+    }
+
+    //hapus data basis pengetahuan
+    public function pengetahuan_delete($id)
+    {
+        $pengetahuan = new BasisPengetahuan();
+        $kriteriaa->delete($id);
+        
+        return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
+
+    }
+
     public function akun()
     {
         return view('pakar/akun');

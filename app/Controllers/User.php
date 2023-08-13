@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\KriteriaProduk;
+use App\Models\RiwayatPencarian;
 
 class User extends BaseController
 {
@@ -27,6 +28,11 @@ class User extends BaseController
 
     public function riwayat_pencarian()
     {
-        return view('user/riwayat');
+        $riwayat = new RiwayatPencarian();
+        $data = $riwayat->findAll();
+        return view('user/riwayat', [
+            'dataa' => $data,
+            
+        ]);
     }
 }

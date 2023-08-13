@@ -95,6 +95,8 @@ $routes->get('/kriteria_produk_pakar', 'Pakar::kriteria_produk');
 $routes->post('/kriteria_produk_pakar', 'Pakar::kriteria_produk_create');
 $routes->add('add_edit_pakar_data_kriteria/(:num)?', 'Pakar::edit_data_kriteria/$1');
 $routes->get('/kriteria_produk_pakar/hapus/(:num)', 'Pakar::kriteria_produk_delete/$1');
+$routes->get('/logout_pakar', 'Pakar::logout');
+
 
 $routes->get('/pencarian_kemasan', 'User::pencarian_kemasan');
 $routes->post('/pencarian_kemasan', 'Perhitungan::pencarian');

@@ -29,12 +29,6 @@
                 <li><a class="nav-link" href="<?php echo base_url('/basis_pengetahuan_pakar');?>">Basis Pengetahuan</a></li>
               </ul>
             </li>
+            <li><a href="<?php echo base_url('/logout_pakar');?>" class="nav-link"><i class="fas fa-sharp fa-regular fa-circle-exclamation"></i><span>Logout</span></a></li>
 
-
-
-          <!-- <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-            <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Documentation
-            </a>
-          </div> </aside> -->
 </div>

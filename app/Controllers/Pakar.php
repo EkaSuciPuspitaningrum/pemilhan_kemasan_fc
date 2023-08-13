@@ -319,7 +319,10 @@ class Pakar extends BaseController
 
     public function akun()
     {
-        return view('pakar/akun');
+        session()->destroy();
+        return redirect()->to(base_url('/'));
     }
+
+
 
 }

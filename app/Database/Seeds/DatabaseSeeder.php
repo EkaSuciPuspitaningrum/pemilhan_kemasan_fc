@@ -9,8 +9,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call('Admin');
-        $this->call('BasisPengetahuan');
         $this->call('JenisKemasan');
         $this->call('KriteriaProduk');
+        $this->call('BasisPengetahuan');
     }
 }

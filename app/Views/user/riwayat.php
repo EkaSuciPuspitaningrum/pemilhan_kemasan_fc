@@ -23,30 +23,37 @@
                        
                         <div class="card-body">
                             <div> 
-                                <table id="table" class="table" style="text-align: center">
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align: center" scope="col">#</th>
-                                            <th style="text-align: center" scope="col">Kode Jenis</th>
-                                            <th style="text-align: center" scope="col">Jenis Kemasan</th>
-                                            <th style="text-align: center" scope="col">Keterangan Jenis Kemasan</th>
-                                            <th style="text-align: center" scope="col">Action</th>
+                            <table id="table" class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center">No</th>
+                                        <th style="text-align: center">Nama Produk</th>
+                                        <th style="text-align: center">Berat Produk</th>
+                                        <th style="text-align: center">Ukuran Produk</th>
+                                        <th style="text-align: center">Volume Produk</th>
+                                        <th style="text-align: center">Jenis Kemasan</th>
+                                        <th style="text-align: center">Persentase Pencarian</th>
+                                        <th style="text-align: center">Created At</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                    $no = 1;
+                                    foreach ($dataa as $row) : ?>
+                                        <tr style="text-align: center">
+                                            <td><?= $no++ ?></td>
+                                            <td><?= $row->namaproduk ?></td>
+                                            <td><?= $row->beratproduk ?></td>
+                                            <td><?= $row->ukuranproduk ?></td>
+                                            <td><?= $row->volumeproduk ?></td>
+                                            <td><?= $row->jenis_kemasan ?></td>
+                                            <td><?= $row->persentase_perhitungan ?></td>
+                                            <td><?= $row->created_date ?></td>
+
                                         </tr>
-                                    </thead>
-                                    <tbody >
-                                        <!-- @foreach ($jenis_kemasan as $kemasan )
-                                        <tr>
-                                            <th>{{ $i++}}</th>
-                                            <td>{{$kemasan->id_kemasan}}</td>
-                                            <td>{{$kemasan->jenis_kemasan}}</td>
-                                            <td>{{$kemasan->keterangan_kemasan}}</td>
-                                            <td><a data-toggle="modal" href="{{ url('/kemasan_show/{id}',$kemasan->id) }}"  data-target="#editKemasan" type="button" class="btn btn-warning">Edit</a>
-                                                <a href="/kemasan/hapus/{{ $kemasan->id }}" type="button" class="btn btn-danger">Hapus</a>
-                                            </td>
-                                        </tr>
-                                        @endforeach -->
-                                    </tbody>
-                                </table>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>   
                             </div>
                             
                         </div>

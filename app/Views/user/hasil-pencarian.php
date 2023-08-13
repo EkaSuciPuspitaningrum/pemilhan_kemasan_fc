@@ -22,14 +22,21 @@
                             <div class="pilihan" class="mt-4">
                                 <table class="table table-bordered table-hovered">
                                     <thead>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th>No</th>
                                             <th>Kriteria Produk</th>
-                                            <th>Pilihan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+                                        <?php
+                                        $no = 1;
+                                        foreach ($selectedKriteriaNames as $kriteriaa) :
+                                        ?>
+                                                <tr>
+                                                <td style="text-align: center"><?= $no++ ?></td>
+                                                <td><?= $kriteriaa ?></td> 
+                                                </tr>
+                                            <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -38,68 +45,18 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <!-- @foreach ($kemasans as $kemasan)
-                            @if ($kemasan->id == array_key_first($cfHasil))
                                 <div class="row bg-light rounded-sm mt-4">
                                     <div class="col-md p-3">
                                         <h3 style="font-size: 25px" class="mb-4">Hasil Rekomendasi</h3>
                                         <p>Berdasarkan daftar kriteria produk yang dipilih, jenis kemasan yang yang cocok dengan produk Anda :</p>
-                                           <strong><h4 style="font-size: 22px" class="mb-3 text-success">{{ $kemasan->jenis_kemasan }}</h4></strong>
-                                            {{-- <p style="font-size: 20px" class="text-success">Presentase : {{$cfHasil[array_key_first($cfHasil)] * 100}}%</p> --}}
+                                            <strong><h4 style="font-size: 22px" class="mb-3 text-success"><?= $jenisKemasanNameWithHighestPercentage ?></h4></strong>
+                                            <p>Jenis kemasan dan persentase hitungan: <?= $highestPercentageFormatted ?></p>
                                     </div>
                                 </div>
-                            @endif
-                        @endforeach -->
                         </div>
                     </div>
                     
-                    <!-- @foreach ($kemasans as $kemasan)
-                    @if ($kemasan->id == array_key_first($cfHasil))
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Penjelasan Kemasan :</h4>
-                        </div>
-                        <div class="card-body">
-                            {!!$kemasan->keterangan_kemasan!!}
-                        </div>
-                    </div>
-                    @endif
-                    @endforeach -->
-
-                    <div id="kemungkinan" class="mt-4 no-print">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Kemungkinan Jenis Kemasan Lain :</h4>
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered table-hovered">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Jenis Kemasan</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="plain">
-                                        <!-- @php
-                                            $i = 0;
-                                        @endphp
-                                        @foreach ($cfHasil as $key => $cf)
-                                            @foreach ($kemasans as $kemasan)
-                                                @if ($key == $kemasan->id)
-                                                @if($i <= 3)
-                                                <tr>
-                                                    <td>{{$i++}}</td>
-                                                    <td>{{$kemasan->jenis_kemasan}}</td>
-                                                </tr>
-                                                @endif
-                                                @endif
-                                            @endforeach
-                                        @endforeach -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -30,68 +30,47 @@
                                     <label for="namaproduk">Nama Produk</label>
                                     <input type="text"
                                            class="form-control"
-                                           id="namaproduk" required>
+                                           id="namaproduk" name="namaproduk" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="beratproduk">Berat Produk</label>
                                     <input type="text"
                                            class="form-control"
-                                           id="beratproduk" >
+                                           id="beratproduk" name="beratproduk">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="ukuranproduk">Ukuran Produk</label>
                                     <input type="text"
                                            class="form-control"
-                                           id="ukuranproduk" >
+                                           id="ukuranproduk" name="ukuranproduk">
                                     <code>Panjang x Lebar x Tinggi (cm), Jika cair kosongkan!</code>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="volumeproduk">Volume Produk</label>
                                     <input type="number"
                                            class="form-control"
-                                           id="volumeproduk">
+                                           id="volumeproduk" name="volumeproduk">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label>Kriteria Produk</label>
-                                    <table id="table" class="table table-hover table-bordered mb-3" >
+                                    <table id="table" class="table table-hover table-bordered" >
                                         <thead class="bg-primary">
                                             <tr>
                                                 <th class="text-white text-center">No</th>
                                                 <th class="text-white text-center">Kriteria Produk</th>
-                                                <th class="text-white text-center">Pilih Kriteria Produk</th>
-
-                                                
+                                                <th class="text-white text-center">Pilih Kriteria Produk</th>    
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white">
-                                            <!-- @foreach ($kriteria as $kriteria)
-                                            <tr>
-                                                <th class="text-center"></th>
-                                                <th class=""></th>
-                                                <th class="text-center">
-                                                    <div class="form-group">
-                                                        <select name="kondisi[]" id="kondisi" class="form-control">
-                                                            <option value="" class="">Sangat Yakin</option>
-                                                            <option value="" class="">Yakin</option>
-                                                            <option value="" class="">MUngkin</option>
-                                                            <option value="" class="">Ragu-Ragu</option>
-                                                            <option value="" class="">Tidak Yakin</option>
-                                                        </select>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            @endforeach -->
-                                            
-                                                <?php 
+                                            <?php 
                                             $no = 1;
                                             foreach ($kriteria as $r) : ?>
                                                 <tr>
-                                                <td style="text-align: center"><?php echo $no++ ?></td>
-                                                    <td><?php echo $r->kriteria_produk ?></td>
+                                                    <td style="text-align: center"><?php echo $no++ ?></td>
+                                                        <td><?php echo $r->kriteria_produk ?></td>
                                                     <td style="text-align: center">
-                                                    <input class="form-check-input" type="checkbox" id="defaultCheck1" name="kriteria[]" value="<?php echo $r->id ?>">
-
-                                                </td>
+                                                        <input class="form-check-input" type="checkbox" id="defaultCheck1" name="kriteria[]" value="<?php echo $r->id ?>">
+                                                    </td>
                                                 </tr>
                                             <?php endforeach ?>
                                         </tbody>

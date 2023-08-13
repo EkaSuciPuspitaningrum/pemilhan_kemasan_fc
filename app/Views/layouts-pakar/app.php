@@ -37,13 +37,13 @@
       <!-- Main Content -->
         <div class="main-wrapper">
             <!-- Header -->
-            <?= $this->include('components-admin/header') ?>
+            <?= $this->include('components-pakar/header') ?>
             <!-- Sidebar -->
-            <?= $this->include('components-admin/sidebar') ?>
+            <?= $this->include('components-pakar/sidebar') ?>
             <!-- Content -->
             <?= $this->renderSection('content') ?>
             <!-- Footer -->
-            <?= $this->include('components-admin/footer') ?>
+            <?= $this->include('components-pakar/footer') ?>
         </div>
   </div>
 

@@ -21,8 +21,6 @@ class Pakar extends BaseController
         $this->jeniskemasan = new JenisKemasan();
         $this->kriteriaproduk = new KriteriaProduk();
         $this->pengetahuan = new BasisPengetahuan();
-        $this->datapakar = new DataPakar();
-
     }
 
     public function dashboard_pakar()
@@ -37,11 +35,12 @@ class Pakar extends BaseController
         $data = $kemasan->findAll();
         
         return view('pakar/jenis_kemasan', [
-            'data' => $data
+            'dataa' => $data
         ]);
     }
 
-    //simpan data jenis kemasan
+
+    //simpan data
     public function jenis_kemasan_create()
     {
         $session = session();
@@ -66,21 +65,21 @@ class Pakar extends BaseController
         }
     }
 
-    //hapus data jenis kemasan
+    //hapus data
     public function jenis_kemasan_delete($id)
     {
         $kemasan = new JenisKemasan();
         $kemasan->delete($id);
         
         return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
+
     }
 
-    //edit data jenis kemasan
+    //edit data
     public function add_edit_data($id = null)
     {
-        
         $kemasan = new JenisKemasan();
-        $data = $kemasan->findAll();
+        $dataa = $kemasan->findAll();
 
         $data = [];
 
@@ -116,6 +115,7 @@ class Pakar extends BaseController
             'dataa' => $dataa
         ]);
     }
+
 
     //data kriteria kemasan
     public function kriteria_produk()

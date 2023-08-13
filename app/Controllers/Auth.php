@@ -93,15 +93,15 @@ class Auth extends BaseController
            $password = $this->request->getVar('password');
            $data = $model->where('email', $email)->first();
            if($data){
-               $pass = $data['password_hash'];
-               $verify_pass = password_verify($password, $pass);
-               if($verify_pass){
-                   $ses_data = [
-                       'id'       => $data['id'],
-                       'name'     => $data['name'],
-                       'email'    => $data['email'],
-                       'logged_in'     => TRUE
-                   ];
+            $pass = $data->password_hash;
+            $verify_pass = password_verify($password, $pass);
+            if($verify_pass){
+                $ses_data = [
+                    'id'       => $data->id,
+                    'first_name'     => $data->first_name,
+                    'email'    => $data->email,
+                    'logged_in'     => TRUE
+                ];
                    $session->set($ses_data);
                    return redirect()->to('/dashboard_pakar');
                }else{

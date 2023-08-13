@@ -80,9 +80,9 @@ $routes->get('/logout_admin', 'Admin::logout');
 
 $routes->get('/dashboard_pakar', 'Pakar::dashboard_pakar');
 $routes->get('/jenis_kemasan_pakar', 'Pakar::jenis_kemasan');
-$routes->post('/jenis_kemasan_create', 'Pakar::jenis_kemasan_create');
-$routes->add('add_edit_data/(:num)?', 'Pakar::add_edit_data/$1');
-$routes->get('/jenis_kemasan/hapus/(:num)', 'Pakar::jenis_kemasan_delete/$1');
+$routes->post('/jenis_kemasan_pakar_create', 'Pakar::jenis_kemasan_create');
+$routes->add('add_edit_pakar_data/(:num)?', 'Pakar::add_edit_data/$1');
+$routes->get('/jenis_kemasan_pakar/hapus/(:num)', 'Pakar::jenis_kemasan_delete/$1');
 
 
 // $routes->get('/kriteria_produk_pakar', 'Pakar::kriteria_produk');

@@ -202,6 +202,7 @@ class Pakar extends BaseController
 
     }
 
+
     //basis pengetahuan
     public function basis_pengetahuan()
     {
@@ -311,7 +312,7 @@ class Pakar extends BaseController
     public function pengetahuan_delete($id)
     {
         $pengetahuan = new BasisPengetahuan();
-        $kriteriaa->delete($id);
+        $pengetahuan->delete($id);
         
         return redirect()->back()->with('sukses', 'Data berhasil dihapus.');
 

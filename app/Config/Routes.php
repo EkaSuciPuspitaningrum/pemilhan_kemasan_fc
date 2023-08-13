@@ -71,19 +71,18 @@ $routes->post('/kriteria_produk/hapus(:num)', 'Admin::kriteria_produk_delete/$1'
 $routes->add('edit_kriteria/(:num)?', 'Admin::edit_kriteria/$1');
 $routes->get('/kriteria/hapus/(:num)', 'Admin::kriteria_delete/$1');
 
-//$routes->get('/basis_pengetahuan', 'Admin::basis_pengetahuan');
-
-$routes->get('/basis_pengetahuan', 'Pakar::basis_pengetahuan');
-$routes->post('/basis_pengetahuan_create', 'Pakar::basis_pengetahuan_create');
-$routes->add('/basis_pengetahuan/edit','Pakar::basis_pengetahuan_edit');
-//$router->get('/basis_pengetahuan/hapus/(:num)','Pakar::basis_pengetahuan_delete/$1');
-
 $routes->add('edit_pengetahuan/(:num)?', 'Admin::edit_pengetahuan/$1');
 $routes->get('/pengetahuan/hapus/(:num)', 'Admin::pengetahuan_delete/$1');
 
-
 $routes->get('/data_pakar', 'Admin::data_pakar');
 $routes->get('/logout_admin', 'Admin::logout');
+
+
+
+$routes->get('/basis_pengetahuan_pakar', 'Pakar::basis_pengetahuan');
+$routes->post('/basis_pengetahuan_pakar_create', 'Pakar::basis_pengetahuan_create');
+$routes->add('/add_edit_pakar_data/edit','Pakar::edit_pengetahuan/$1');
+$routes->get('/basis_pengetahuan_pakar/hapus/(:num)', 'Pakar::basis_pengetahuan_delete/$1');
 
 $routes->get('/dashboard_pakar', 'Pakar::dashboard_pakar');
 $routes->get('/jenis_kemasan_pakar', 'Pakar::jenis_kemasan');
@@ -96,6 +95,7 @@ $routes->post('/kriteria_produk_pakar', 'Pakar::kriteria_produk_create');
 $routes->add('add_edit_pakar_data_kriteria/(:num)?', 'Pakar::edit_data_kriteria/$1');
 $routes->get('/kriteria_produk_pakar/hapus/(:num)', 'Pakar::kriteria_produk_delete/$1');
 $routes->get('/logout_pakar', 'Pakar::logout');
+
 
 
 $routes->get('/pencarian_kemasan', 'User::pencarian_kemasan');

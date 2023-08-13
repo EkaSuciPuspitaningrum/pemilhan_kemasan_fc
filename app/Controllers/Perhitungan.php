@@ -106,7 +106,7 @@ class Perhitungan extends BaseController
 
     private function getJenisKemasan($basisPengetahuan)
     {
-        $jenisKemasanModel = new JenisKemasan(); // Replace with your actual model
+        $jenisKemasanModel = new JenisKemasan(); 
         $jenisKemasan = $jenisKemasanModel->find($basisPengetahuan->jenis_kemasan_id);
     
         if ($jenisKemasan) {

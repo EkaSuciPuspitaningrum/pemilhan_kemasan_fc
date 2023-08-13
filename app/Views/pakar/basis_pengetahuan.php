@@ -81,11 +81,25 @@
                                                 <tr>
                                                 <td style="text-align: center"><?php echo $no++ ?></td>
                                                 <td style="text-align: center">BP<?php echo $r->id ?></td>
-                                                <td><?php echo $r->jenis_kemasan ?></td>
-                                                <td><?php echo $r->kriteria_produk ?></td>
+                                                
+                                                <?php
+                                                    $jenisKemasan = $kemasan->find($r->jenis_kemasan_id);
+                                                    if ($jenisKemasan) {
+                                                        echo $jenisKemasan->jenis_kemasan;
+                                                    }
+                                                ?>
+                                                <td>
+                                                    <?php
+                                                    // Assuming $kriteriaProdukModel is the instance of KriteriaProduk model
+                                                    $kriteriaProduk = $kriteria->find($r->kriteria_produk_id);
+                                                    if ($kriteriaProduk) {
+                                                        echo $kriteriaProduk->kriteria_produk;
+                                                    }
+                                                    ?>
+                                                </td>
                                                 <td style="text-align: center">
-                                                <button class="btn btn-warning" href="<?php echo base_url('kriteria_produk/edit/'.$r->id);?>">EDIT</button>
-                                                    <button class="btn btn-danger" href="<?php echo base_url('kriteria_produk/hapus/'.$r->id);?>">HAPUS</button>
+                                                <button class="btn btn-warning" href="<?php echo base_url('basis_pengetahuan/edit/'.$r->id);?>">EDIT</button>
+                                                    <button class="btn btn-danger" href="<?php echo base_url('pengetahuan/hapus/'.$r->id);?>">HAPUS</button>
                                                 </td>
                                                 </tr>
                                             <?php endforeach ?>

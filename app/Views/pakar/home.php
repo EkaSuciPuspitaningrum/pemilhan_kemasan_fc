@@ -73,21 +73,44 @@
             </div>
           </div>
         </section>
+        
+        <section class="section">
+
         <div class="section-body">
+        <h2 class="section-title">Informasi</h2>
+          <p class="section-lead">Informasi mengenai penerapan dari langkah-langkah perhitungan metode FC. 
+            Untuk dapat melihatnya, silahkan klik menu-menu leftbar disamping</p>
+
             <div class="row">
               <div class="col-12">
                 <div class="card">
-                  <div class="card-header">
-                    <h4>Penjelasan</h4>
+                   <div class="card-header">
+                    <h4>Pengertian Forward Chaining!</h4>
                   </div>
-                  <div class="card-body">
-                   <!-- ini diisi -->
+                  <div class="card-body" style="text-align: justify;">
+                  <p>Forward chaining adalah contoh konsep umum dari pemikiran yang dikendalikan oleh data (data driver) 
+                      untuk mencapai suatu kesimpulan atau pemecahan masalah dengan mengumpulkan dan menggabungkan fakta-fakta yang disimpan 
+                      dalam basis pengetahuan. Basis pengetahuan terdiri dari aturan-aturan (rules) dan hubungan antara fakta yang diorganisir 
+                      untuk membantu sistem dalam proses inferensi. Pada penelitian ini aturan (rules) tersebut dituliskan 
+                      dalam pernyataan IF [premis] sebagai informasi, data atau bukti dan 
+                      THEN [konklusi] sebagai kesimpulan berupa tujuan, hipotesa atau penjelasan.</p>
+                    <p>Metode forward chaining dimulai dari data menuju tujuan, 
+                      dari bukti menuju hipotesa atau dari kriteria menuju jenis. 
+                      Berikut merupakan alur kerja forward chaining </p>
+                  <ol>
+                    <li><p>Matching, setiap rules yang ada pada basis pengetahuan akan dibandingkan 
+                      dengan fakta-fakta yang diketahui untuk mencari rules mana yang memenuhi premis.</p></li>
+                    <li><p>Conflict Resolution, bertugas mencari rules mana yang memiliki prioritas tertinggi yang berpotensi 
+                      untuk dieksekusi. Langkah ini didapatkan dari langkah pertama yang memungkinkan menghasilkan suatu kondisi.</p></li>
+                    <li><p>Execution, proses ini menghasilkan dua kemungkinan, yaitu fakta baru diturunkan 
+                      dan ditambahkan fact base atau rules baru dihasilkan dan ditambahkan ke knowledge base.</p></li>
+                  </ol>
                   </div>
                 </div>
               </div>
-            </div>
+            </div> 
       </div>
-      </div>  
+        </section> 
 
 <?= $this->endSection() ?>
 

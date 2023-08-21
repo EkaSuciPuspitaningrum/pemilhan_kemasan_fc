@@ -31,6 +31,7 @@
                                     <input type="text"
                                            class="form-control"
                                            id="namaproduk" name="namaproduk" required>
+                                    <code>Nama Produk Harus Di isi!</code>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="beratproduk">Berat Produk</label>
@@ -69,7 +70,8 @@
                                                     <td style="text-align: center"><?php echo $no++ ?></td>
                                                         <td><?php echo $r->kriteria_produk ?></td>
                                                     <td style="text-align: center">
-                                                        <input class="form-check-input" type="checkbox" id="defaultCheck1" name="kriteria[]" value="<?php echo $r->id ?>">
+                                                        <input class="form-check-input" type="checkbox" id="defaultCheck1" name="kriteria[]" 
+                                                        value="<?php echo $r->id ?>">
                                                     </td>
                                                 </tr>
                                             <?php endforeach ?>

@@ -12,6 +12,67 @@ class Perhitungan extends BaseController
 {
     public function pencarian()
     {
+        $kriteriaData = $this->Kriteria_Produk->kriteria();
+        $selectKriteria = $this->Kriteria_Produk->selectKriteria('kriteria');
+
+        $hasilpencarian = array('kriteria' => $kriteriaData);
+
+        $data = array(
+            'basisPengetahuan'   => $basisPengetahuan,
+            'button'             => 'selanjutnya',
+            'action'             => site_url('user/pencarian_kemasan')
+        );
+        $this->template->load('template', 'user/hasil-pencarian', $data);
+    }
+
+    public function next()
+    {
+        $id_analisis = $this->post('jawaban', TRUE);
+        $next = $this->Kriteria_Produk->selectKriteria('kriteria');
+
+        if($next=="masalah"){
+            $selectKriteria = $this->Kriteria_Produk->selectKriteria('kriteria');
+
+            $data = array(
+                'basisPengetahuan'   => $basisPengetahuan,
+                'button'             => 'selanjutnya',
+                'action'             => site_url('user/pencarian_kemasan')
+            );
+            $this->template->load('template', 'user/hasil-pencarian', $data);    
+        
+        }elseif($next=="solusi"){
+            $solusi = $this->Kriteria_Produk->get_solusi_by_id($id_analisa);
+
+            $data_hasil = array(
+                'id_solusi'         => $basisPengetahuan,
+                'button'             => 'selanjutnya',
+                'action'             => site_url('user/pencarian_kemasan')
+            );
+
+            $hasilpencarian = $this->HasilPencarian->set_hasil($id_analisa);
+
+            $data = array (
+                'solusi_data' => $solusi
+            );
+
+            $this->template->load('template','user/pencarian_kemasan', $data);
+        }
+    }
+
+    public function kemasan($id){
+        $penentuankemasan = $this->Masalah_model->get_all();
+        $hasilpencarian = $this->Hasil_model->get_by_id($id);
+
+        $data = array(
+            'masalah_data'      =>$penentuankemasan,
+            'hasil_data'        => $hasilpencarian
+        );
+
+        $this->template->load('template','user/pencarian_kemasan', $data);
+    }
+
+    public function pencarian2()
+    {
         // Get the selected criteria from the form
         $selectKriteria = $this->request->getPost('kriteria');
 
@@ -55,7 +116,8 @@ class Perhitungan extends BaseController
             if (!isset($jenisKemasanPercentage[$jenisKemasanInfo['jenis_kemasan']])) {
                 $jenisKemasanPercentage[$jenisKemasanInfo['jenis_kemasan']] = 0;
             }
-            $jenisKemasanPercentage[$jenisKemasanInfo['jenis_kemasan']] += ($matchingRulesCount / $totalRulesCount) * 100;
+            $jenisKemasanPercentage[$jenisKemasanInfo['jenis_kemasan']] += 
+            ($matchingRulesCount / $totalRulesCount) * 100;
         }
 
         // Get jenis kemasan data for each basis_pengetahuan

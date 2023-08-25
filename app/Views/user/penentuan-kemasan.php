@@ -69,14 +69,16 @@
                                                 <tr>
                                                     <td style="text-align: center"><?php echo $no++ ?></td>
                                                         <td><?php echo $r->kriteria_produk ?></td>
+                                                        
                                                     <td style="text-align: center">
-                                                        <input class="form-check-input" type="checkbox" id="defaultCheck1" name="kriteria[]" 
+                                                        <input class="form-check-input" type="checkbox" id="kriteria" name="kriteria[]" 
                                                         value="<?php echo $r->id ?>">
                                                     </td>
                                                 </tr>
                                             <?php endforeach ?>
                                         </tbody>
                                     </table>
+
                                     <br> <br>
                                     <div class="d-grid gap-2 d-md-flex justify-content-center">
                                         <button class="btn btn-primary" type="submit"><i class="fas fa-solid fa-magnifying-glass"></i>  Analisis</button>

@@ -41,4 +41,23 @@ class BasisPengetahuan extends Model
 
         $this->insert($data);
     }
+
+    public function getMatchedRules($selectedCriteria) {
+        return $this->whereIn('kriteria_produk_id', $selectedCriteria)
+                    ->findAll();
+    }
+
+    public function getJenisKemasanName($jenisKemasanId) {
+        $jenisKemasan = $this->db->table('jenis_kemasan')
+                                 ->where('id', $jenisKemasanId)
+                                 ->get()
+                                 ->getRow();
+    
+        if ($jenisKemasan) {
+            return $jenisKemasan->jenis_kemasan; // Ganti dengan atribut yang sesuai
+        }
+    
+        return null;
+    }
+    
 }

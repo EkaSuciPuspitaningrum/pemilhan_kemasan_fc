@@ -10,10 +10,10 @@
         <div class="section-header">
             <h1>Hasil Pencarian Kemasan</h1>
         </div>
-        <?php if (!$jenisKemasanName): ?>
+        <?php if (!$result): ?>
         <p>Tidak ada jenis kemasan yang sesuai dengan kriteria Anda.</p>
     <?php else: ?>
-        <p>Jenis Kemasan yang Sesuai: <?php echo $jenisKemasanName; ?></p>
+        <p>Jenis Kemasan yang Sesuai: <?php echo $result; ?></p>
     <?php endif; ?>
     </section>
 </div>

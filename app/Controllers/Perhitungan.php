@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\BasisPengetahuan;
+use App\Models\KriteriaProduk;
 
 class Perhitungan extends BaseController
 {
@@ -15,28 +16,55 @@ class Perhitungan extends BaseController
         return view('penentuan_kemasan', ['kriteria' => $kriteria]);
     }
 
+
+    
+
     public function pencarian()
-    {
-        $selectedCriteria = $this->request->getVar('kriteria'); // Ambil data kriteria dari form
+{
+    $selectedCriteria = $this->request->getVar('kriteria');
 
-        if (!$selectedCriteria) {
-            return redirect()->to('/pencarian_kemasan'); // Redirect kembali jika tidak ada kriteria terpilih
-        }
-
-        $basisModel = new BasisPengetahuan();
-        $matchedRules = $basisModel->getMatchedRules($selectedCriteria);
-
-        $result = []; // Simpan hasil perhitungan berdasarkan matched rules
-        foreach ($matchedRules as $rule) {
-            $jenisKemasan = $basisModel->getJenisKemasanName($rule->jenis_kemasan_id);
-            if ($jenisKemasan) {
-                $result[] = $jenisKemasan;
-            }
-        }
-
-        // Tampilkan hasil perhitungan
-        return view('hasil_perhitungan', ['result' => $result]);
+    if (!$selectedCriteria) {
+        return redirect()->to('/pencarian_kemasan');
     }
+
+    $basisModel = new BasisPengetahuan();
+    $matchedRules = $basisModel->getMatchedRules($selectedCriteria);
+
+    $result = null; // Store the selected packaging type
+    foreach ($matchedRules as $rule) {
+        $jenisKemasan = $basisModel->getJenisKemasanName($rule->jenis_kemasan_id);
+        if ($jenisKemasan) {
+            $result = $jenisKemasan;
+            break; // Break the loop after the first matched rule
+        }
+    }
+
+    return view('user/hasil-pencarian', ['result' => $result]);
+}
+
+
+    // public function pencarian()
+    // {
+    //     $selectedCriteria = $this->request->getVar('kriteria'); // Ambil data kriteria dari form
+
+    //     if (!$selectedCriteria) {
+    //         return redirect()->to('/pencarian_kemasan'); // Redirect kembali jika tidak ada kriteria terpilih
+    //     }
+
+    //     $basisModel = new BasisPengetahuan();
+    //     $matchedRules = $basisModel->getMatchedRules($selectedCriteria);
+
+    //     $result = []; // Simpan hasil perhitungan berdasarkan matched rules
+    //     foreach ($matchedRules as $rule) {
+    //         $jenisKemasan = $basisModel->getJenisKemasanName($rule->jenis_kemasan_id);
+    //         if ($jenisKemasan) {
+    //             $result[] = $jenisKemasan;
+    //         }
+    //     }
+
+    //     // Tampilkan hasil perhitungan
+    //     return view('user/hasil-pencarian', ['result' => $result]);
+    // }
 
     // protected $pengetahuan;
 
@@ -76,5 +104,6 @@ class Perhitungan extends BaseController
     //     }
     
     //     return view('user/hasil-pencarian', ['jenisKemasanName' => $jenisKemasanName]);
-    // }   
+    // } 
+      
 }
